@@ -18,7 +18,7 @@ for (let i = 0; i < massiv.length; i++){
 // 3-rd task
 console.log(`Even numbers of array ${massiv} is:`)
 for (let i = 0; i < massiv.length; i++){
-  if (massiv[i] % 2 == 0){
+  if (massiv[i] % 2 === 0){
     console.log(massiv[i]);
   }
 }
