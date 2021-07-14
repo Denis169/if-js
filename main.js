@@ -1,36 +1,24 @@
-// 6th item of homework
+// 1-st task
+const array = [2, 3, 5, 8];
+let composition = 1;
+for (let i = 0; i < array.length; i++){
+  composition *= array[i];
+}
+console.log(`Composition of array ${array} = ${composition}`);
 
-let user = 'John Doe';
-console.log(user);
+// 2-nd task
+const massiv = [2, 5, 8, 15, 0, 6, 20, 3];
+console.log(`Element greater than 5 but less than 10 from ${massiv} is:`);
+for (let i = 0; i < massiv.length; i++){
+  if (massiv[i] > 5 && massiv[i] < 10){
+    console.log(massiv[i]);
+  }
+}
 
-let student = 'Denis logimakhov';
-console.log(student);
-
-student = user;
-
-// In the user variable now 'John Doe'
-
-console.log(user);
-
-// 7th item of homework:
-
-let test = 1;
-test++;
-test = test + '1';
-
-// In the test variable now 21
-
-console.log(test);
-test = test - 1;
-
-// In the test variable now 20
-
-console.log(test);
-test = !!test;
-
-// In the test variable now tru
-
-console.log(test);
-
-
-
+// 3-rd task
+console.log(`Even numbers of array ${massiv} is:`)
+for (let i = 0; i < massiv.length; i++){
+  if (massiv[i] % 2 === 0){
+    console.log(massiv[i]);
+  }
+}
