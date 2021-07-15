@@ -26,20 +26,15 @@
 // 3-rd LESSON
 // Palindrom
 function palindrom(word){
-  const letter = word.split('');
-  const conversely=[];
-  for (let i = letter.length-1; i > -1; i--){
-    conversely.push(letter[i]);
+  let conversely=('');
+  for (let i = word.length-1; i > -1; i--){
+    conversely = conversely + word[i];
   }
-  for (let j = 0; j < letter.length; j++){
-    if (letter[j] !== conversely[j]){
-      return(false);
-    }
-  }
-  return(true);
+  return(word === conversely);
 }
 
-console.log(palindrom('fgfgfg'));
+console.log(palindrom('fgfgfgf'));
+
 
 // Функция min(a, b) и функция max(a,b)
 
