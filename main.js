@@ -25,39 +25,30 @@
 
 // 3-rd LESSON
 // Palindrom
-function palindrom(word){
-  let conversely=('');
-  for (let i = word.length-1; i > -1; i--){
-    conversely = conversely + word[i];
-  }
-  return(word === conversely);
+function palindrom(word) {
+  const array = word.split('');
+  array.reverse();
+  const newWord = array.join('');
+  return (word === newWord);
 }
 
-console.log(palindrom('fgfgfgf'));
+console.log(palindrom('atata'));
 
 
 // Функция min(a, b) и функция max(a,b)
 
-function min(a,b){
-  return(a < b ? a: b );
-}
+const min = (a,b) => a < b ? a: b ;
 
-console.log(min(5,2));
+console.log(min(6,3));
 
-function max(a,b){
-  return(a > b ? a: b );
-}
+const max = (a,b) => a > b ? a: b;
 
-console.log(max(5,10));
+console.log(max(12,6));
 
 // Замена элементов массива
-function findZero(array){
-  const numbersZero = [];
-  for (let i = 0; i < array.length; i++){
-    array[i] !== 0 ? numbersZero.push(array[i]): numbersZero.push('zero');
-  }
-  console.log(numbersZero);
-}
 
 const numbers =  [2, 4, 5, 8, 0, 8, 8, 0, 78, 95];
-findZero(numbers);
+const nul = numbers.map(function (num) { 
+  return num === 0 ? 'zero': num
+});
+console.log(nul);
