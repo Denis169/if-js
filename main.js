@@ -15,7 +15,7 @@ console.log(max(12,6));
 
 // Замена элементов массива
 
-const change = (numbers) => numbers.map (toZero = (num) => num.toString().includes(0) ? num.toString().replace(/0/g, 'zero'): num );
+const change0toZero = (numbers) => numbers.map ( num => num.toString().includes(0) ? num.toString().replace(/0/g, 'zero') : num );
 
 const numbers =  [2, 40, 502, 8, 0, 8, 8, 0, 78, 95];
-console.log(change(numbers));
+console.log(change0toZero(numbers));
