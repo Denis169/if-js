@@ -15,8 +15,7 @@ console.log(max(12,6));
 
 // Замена элементов массива
 
+const nul = (numbers) => numbers.toString().replace(/0/g, 'zero').split(',').map (toZero = (num) => !!(Number(num)) ? Number(num): num );
+
 const numbers =  [2, 40, 502, 8, 0, 8, 8, 0, 78, 95];
-
-const nul = numbers.toString().replace(/0/g, 'zero').split(',').map (toZero = (num) => !!(Number(num)) ? Number(num): num );
-
-console.log(nul);
+console.log(nul(numbers));
