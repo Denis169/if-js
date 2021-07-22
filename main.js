@@ -1,21 +1,36 @@
-// Palindrom
-const palindrom = (word) => word === word.split('').reverse().join('');
-  
-console.log(palindrom('atata'));
+// Возвращение суммы
+const sum = (a) => (b) => a+b;
 
-// Функция min(a, b) и функция max(a,b)
+console.log(sum(5)(2));
 
-const min = (a,b) => a < b ? a: b ;
+// Покраска текста <p>
 
-console.log(min(6,3));
+const colors = ['magenta', 'cyan', 'firebrick', 'springgreen', 'skyblue'];
+let clicksOne = 0;
+let clicksTwo = 0;
+let clicksThree = 0;
+ 
 
-const max = (a,b) => a > b ? a: b;
+const elemText = document.body.childNodes[1];
+const changeColor = () => {
+  elemText.style.color = colors[clicksOne];
+  clicksOne === 4 ? clicksOne = 0 : ++clicksOne;
+};
+elemText.addEventListener('click', () => changeColor(elemText));
 
-console.log(max(12,6));
 
-// Замена элементов массива
+const elemTextTwo = document.body.childNodes[3];
+const changeColorTwo = () => {
+  elemTextTwo.style.color = colors[clicksTwo];
+  clicksTwo === 4 ? clicksTwo = 0 : ++clicksTwo;  
+};
+elemTextTwo.addEventListener('click', () => changeColorTwo(elemTextTwo));
 
-const replaceNultoZero = (numbers) => numbers.map(num => num.toString().includes(0) ? num.toString().replace(/0/g, 'zero') : num );
 
-const numbers =  [2, 40, 502, 8, 0, 8, 8, 0, 78, 95];
-console.log(replaceNultoZero(numbers));
+const elemTextThree = document.body.childNodes[5];
+const changeColorThree = () => {
+  elemTextThree.style.color = colors[clicksThree];
+  clicksThree === 4 ? clicksThree = 0 : ++clicksThree;  
+};
+elemTextThree.addEventListener('click', () => changeColorThree(elemTextThree));
+
