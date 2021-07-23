@@ -5,32 +5,25 @@ console.log(sum(5)(2));
 
 // Покраска текста <p>
 
-const colors = ['magenta', 'cyan', 'firebrick', 'springgreen', 'skyblue'];
-let clicksOne = 0;
-let clicksTwo = 0;
-let clicksThree = 0;
- 
+const colorsForText = ['magenta', 'cyan', 'firebrick', 'springgreen', 'skyblue'];
 
-const elemText = document.body.childNodes[1];
-const changeColor = () => {
-  elemText.style.color = colors[clicksOne];
-  clicksOne === 4 ? clicksOne = 0 : ++clicksOne;
+function сounter() {
+  let currentCount = 0;
+  return () => currentCount === 5 ? currentCount = 0 : currentCount++;
+}; 
+
+let counterText = сounter();
+
+const changeColor = (elemText) => {
+    elemText.style.color = colorsForText[counterText()];
 };
-elemText.addEventListener('click', () => changeColor(elemText));
 
+const elemTextFirst = document.getElementById('text_1');
+elemTextFirst.addEventListener('click', () => changeColor(elemTextFirst));
 
-const elemTextTwo = document.body.childNodes[3];
-const changeColorTwo = () => {
-  elemTextTwo.style.color = colors[clicksTwo];
-  clicksTwo === 4 ? clicksTwo = 0 : ++clicksTwo;  
-};
-elemTextTwo.addEventListener('click', () => changeColorTwo(elemTextTwo));
+const elemTextTwo = document.getElementById('text_2');
+elemTextTwo.addEventListener('click', () => changeColor(elemTextTwo));
 
-
-const elemTextThree = document.body.childNodes[5];
-const changeColorThree = () => {
-  elemTextThree.style.color = colors[clicksThree];
-  clicksThree === 4 ? clicksThree = 0 : ++clicksThree;  
-};
-elemTextThree.addEventListener('click', () => changeColorThree(elemTextThree));
+const elemTextThree = document.getElementById('text_3');
+elemTextThree.addEventListener('click', () => changeColor(elemTextThree));
 
