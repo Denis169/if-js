@@ -17,7 +17,7 @@ let counterTextOne = сounter();
 let counterTextTwo = сounter();
 let counterTextThree = сounter();
 
-var a = b; dfdf
+
 
 const elemTextFirst = document.getElementById('text_1');
 elemTextFirst.addEventListener('click', function(e) {e.target.style.color = colorsForText[counterTextOne()]});
