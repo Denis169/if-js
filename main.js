@@ -17,7 +17,7 @@ let counterTextOne = сounter();
 let counterTextTwo = сounter();
 let counterTextThree = сounter();
 
-let a = b;
+var a = b;
 
 const elemTextFirst = document.getElementById('text_1');
 elemTextFirst.addEventListener('click', function(e) {e.target.style.color = colorsForText[counterTextOne()]});
