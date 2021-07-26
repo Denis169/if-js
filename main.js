@@ -10,7 +10,8 @@ const colorsForText = ['magenta', 'cyan', 'firebrick', 'springgreen', 'skyblue']
 function сounter() {
   let currentCount = 0;
   return () => currentCount === 5 ? currentCount = 0 : currentCount++;
-}; 
+}
+
 
 let counterTextOne = сounter();
 let counterTextTwo = сounter();
