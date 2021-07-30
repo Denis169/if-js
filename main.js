@@ -7,6 +7,10 @@ console.log(sum(5)(2));
 
 const colorsForText = ['magenta', 'cyan', 'firebrick', 'springgreen', 'skyblue'];
 
+const elemTextFirst = document.getElementById('text_1');
+const elemTextTwo = document.getElementById('text_2');
+const elemTextThree = document.getElementById('text_3');
+
 const changeColor = () => {
   let count = 0;
   return (event) => {
@@ -14,10 +18,6 @@ const changeColor = () => {
     count === 5 ? count = 0 : count++;
   };
 };
-
-const elemTextFirst = document.getElementById('text_1');
-const elemTextTwo = document.getElementById('text_2');
-const elemTextThree = document.getElementById('text_3');
 
 elemTextFirst.addEventListener('click', changeColor());
 elemTextTwo.addEventListener('click', changeColor());
