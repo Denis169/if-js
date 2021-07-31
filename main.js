@@ -2,7 +2,7 @@
 
 const dataFirst = '2020-11-26';
 
-const dateFormatConversion = (date) => date.split('-').reverse().join('.');
+const dateFormatConversion = (date) => date.replace(/^(\d{4})-(\d{2})-(\d{2})$/, '$3.$2.$1');
 
 console.log(dateFormatConversion(dataFirst));
 
@@ -52,16 +52,12 @@ const data = [
 ];
 
 function filterPrices(array, value) {
-  value = value.toLowerCase();
-  let createdData = array.filter(function (obj) {
-    return Object.values(obj).toString().toLowerCase().indexOf(value) !== -1;
-  });
   let finishData = '';
-  createdData.forEach(function(item){
-   finishData += `${Object.values(item).join(', ')}
-`;
+  value = new RegExp(value,'igm');
+  array.forEach(function (obj) {
+    (value.test(Object.values(obj).join())) && (finishData += `${Object.values(obj).join(', ')}\n`)
   });
   return finishData;
 }
   
-console.log(filterPrices(data, 'Ourika'));
+console.log(filterPrices(data, 'Germany'));
