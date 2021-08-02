@@ -241,18 +241,49 @@ console.log(countryCity(hotels));
 
 // Календарь
 
-// const daysInMonth = 53;
-// const daysInWeek = 7;
-// const dayOfWeek = 4; 
 
-// function getCalendarMonth(daysInMonth,daysInWeek,dayStart) {
-//   let month = [];
-//   let howMachWeeks = Number;
-//    console.log(howMachWeeks);
-  
-// }
+function getCalendarMonth(daysInMonth,daysInWeek,dayOfWeek ) {
+  let month = [];
+  let count = 0;
+  let day = 1;
+  let dayAfterMonth = 1;
+  // Заполняем первый массив в массиве
+  (() =>{
+    let week = [];
+    for (let i = 0; i < dayOfWeek; i++){
+      week[i] = daysInMonth + 1 - (daysInWeek-(daysInWeek - dayOfWeek + i));
+      count++;
+    }
+    while (count < daysInWeek){
+      week[count] = (count + 1) - dayOfWeek;
+      day = (count + 1) - dayOfWeek;
+      count++;
+    }
+    month.push(week);
+  })();
+  // Заполняем массивы с неделями
+  while (day < daysInMonth) {
+    (() => {
+      let week = [];
+      for (let i=0; i < daysInWeek; i++){
+        day++;
+        if (day <= daysInMonth ){
+          week[i] = day;
+        } else {
+          break;
+        }
+      }
+      month.push(week);
+    })();
+  }
+  // Заполняем в последней неделе следующий месяц
+  while (month[month.length - 1].length < daysInWeek){
+    month[month.length-1].push(dayAfterMonth);
+    dayAfterMonth++;
+  }
 
+  console.log(month);
+}
 
-
-// const calendarMonth = getCalendarMonth(daysInMonth, daysInWeek, dayOfWeek);
+getCalendarMonth(45, 10, 6);
 
