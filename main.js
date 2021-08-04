@@ -239,7 +239,7 @@ function countryCity(array) {
 
 console.log(countryCity(hotels));
 
-// Календарь
+Календарь
 
 
 function getCalendarMonth(daysInMonth,daysInWeek,dayOfWeek ) {
@@ -285,5 +285,5 @@ function getCalendarMonth(daysInMonth,daysInWeek,dayOfWeek ) {
   console.log(month);
 }
 
-getCalendarMonth(45, 10, 6);
+getCalendarMonth(30, 7, 6);
 
