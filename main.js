@@ -1,4 +1,4 @@
-// Преобразование формата даты:
+// Date format conversion
 
 const dataFirst = '2020-11-26';
 
@@ -6,7 +6,7 @@ const dateFormatConversion = (date) => date.replace(/^(\d{4})-(\d{2})-(\d{2})$/,
 
 console.log(dateFormatConversion(dataFirst));
 
-// Поиск объектов размещения
+// Search for accommodation facilities
 
 const data = [
   {
@@ -52,12 +52,8 @@ const data = [
 ];
 
 function filterPrices(array, value) {
-  let finishData = '';
   value = new RegExp(value,'igm');
-  array.forEach(function (obj) {
-    (value.test(Object.values(obj).join())) && (finishData += `${Object.values(obj).join(', ')}\n`)
-  });
-  return finishData;
+  return array.reduce((acc, obj) => value.test(Object.values(obj)) ? acc + `${Object.values(obj).join(', ')}\n` : acc );
 }
   
 console.log(filterPrices(data, 'Germany'));
