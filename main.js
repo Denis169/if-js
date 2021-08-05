@@ -53,7 +53,7 @@ const data = [
 
 function filterPrices(array, value) {
   value = new RegExp(value,'igm');
-  return array.reduce((acc, obj) => value.test(Object.values(obj)) ? acc + `${Object.values(obj).join(', ')}\n` : acc );
+  return array.reduce((acc, obj) => value.test(Object.values(obj)) ? acc + `${Object.values(obj).join(', ')}\n` : acc, []);
 }
   
 console.log(filterPrices(data, 'Germany'));
