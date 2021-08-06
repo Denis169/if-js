@@ -1,10 +1,10 @@
-// // Палиндром в одну строку
+// Palindrom in one line
 
 const palindrom = (word) => word === word.split('').reverse().join('');
   
 console.log(palindrom('atata'));
 
-// // Поиск объектов размещения
+// Search of object placement
 
 const data = [
   {
@@ -60,7 +60,7 @@ function filterPrices(array, value) {
   
 console.log(filterPrices(data, 'Germany'));
 
-// // Сопоставление стран с городами из массива
+// Mapping Countries to Array Cities
 const hotels = [
   {
     name: 'Hotel Leopold',
@@ -239,51 +239,34 @@ function countryCity(array) {
 
 console.log(countryCity(hotels));
 
-Календарь
+//Calendar
 
 
-function getCalendarMonth(daysInMonth,daysInWeek,dayOfWeek ) {
-  let month = [];
-  let count = 0;
+function getCalendarMonth ( daysInMonth, daysInWeek, dayOfWeek ) {
   let day = 1;
-  let dayAfterMonth = 1;
-  // Заполняем первый массив в массиве
-  (() =>{
-    let week = [];
-    for (let i = 0; i < dayOfWeek; i++){
-      week[i] = daysInMonth + 1 - (daysInWeek-(daysInWeek - dayOfWeek + i));
-      count++;
-    }
-    while (count < daysInWeek){
-      week[count] = (count + 1) - dayOfWeek;
-      day = (count + 1) - dayOfWeek;
-      count++;
-    }
-    month.push(week);
-  })();
-  // Заполняем массивы с неделями
-  while (day < daysInMonth) {
-    (() => {
-      let week = [];
-      for (let i=0; i < daysInWeek; i++){
+  let amountWeekInMonth = (daysInMonth + (dayOfWeek - 1)) % daysInWeek === 0 ? (daysInMonth + (dayOfWeek - 1)) / daysInWeek : ((daysInWeek - (daysInMonth + (dayOfWeek - 1)) % daysInWeek) + daysInMonth + (dayOfWeek - 1))/daysInWeek; 
+  let month = [];
+  let weekOfCalendar = [];
+
+  for ( let week = 0; week < amountWeekInMonth; week++ ) {
+    for ( let weekDay = 0; weekDay < daysInWeek; weekDay++ ) {
+      if (day <= (dayOfWeek - 1)) {
+        weekOfCalendar.push(daysInMonth - (dayOfWeek-1) + day);
         day++;
-        if (day <= daysInMonth ){
-          week[i] = day;
-        } else {
-          break;
-        }
+      } else if (day <= (daysInMonth + (dayOfWeek-1))) {
+        weekOfCalendar.push(day - (dayOfWeek - 1));
+        day++;
+      } else {
+        weekOfCalendar.push(day - (dayOfWeek - 1) - daysInMonth);
+        day++;
       }
-      month.push(week);
-    })();
-  }
-  // Заполняем в последней неделе следующий месяц
-  while (month[month.length - 1].length < daysInWeek){
-    month[month.length-1].push(dayAfterMonth);
-    dayAfterMonth++;
+    }
+    month.push(weekOfCalendar);
+    weekOfCalendar = [];
   }
 
   console.log(month);
 }
 
-getCalendarMonth(30, 7, 6);
+getCalendarMonth(30, 7, 7);
 
