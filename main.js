@@ -50,12 +50,8 @@ const data = [
 ];
 
 function filterPrices(array, value) {
-  let finishData = [];
   value = new RegExp(value,'igm');
-  array.forEach(function (obj) {
-    (value.test(Object.values(obj).join())) && (finishData.push(Object.values(obj).join(', ')))
-  });
-  return finishData;
+  return array.reduce((acc, obj) => value.test(Object.values(obj)) ? acc + `${Object.values(obj).join(', ')}\n` : acc, []);
 }
   
 console.log(filterPrices(data, 'Germany'));
@@ -222,18 +218,13 @@ const hotels = [
 function countryCity(array) {
   let country = [];
   let finalCountryCity = new Object();
-  array.forEach(function(obj) {
-    country.includes(obj.country) || country.push(obj.country)
-  });
+  array.forEach((obj) => country.includes(obj.country) || country.push(obj.country));
   country.forEach(function(count) {
     let cityes = [];
-    array.forEach(function(obj) {
-      count === obj.country && cityes.push(obj.city);
-    })
+    array.forEach((obj) => count === obj.country && cityes.push(obj.city));
     count = count.replace(/\s/g, '');
     finalCountryCity[count] = cityes;
   })
-  
   return finalCountryCity;
 }
 
