@@ -49,7 +49,7 @@ const data = [
   },
 ];
 
-function filterPrices(array, value) {
+const filterPrices = (array, value) => {
   value = new RegExp(value,'igm');
   return array.reduce((acc, obj) => value.test(Object.values(obj)) ? acc + `${Object.values(obj).join(', ')}\n` : acc, []);
 }
@@ -215,16 +215,13 @@ const hotels = [
   },
 ];
 
-function countryCity(array) {
-  let country = [];
+const countryCity = (array) => {
   let finalCountryCity = new Object();
-  array.forEach((obj) => country.includes(obj.country) || country.push(obj.country));
-  country.forEach(function(count) {
-    let cityes = [];
-    array.forEach((obj) => count === obj.country && cityes.push(obj.city));
-    count = count.replace(/\s/g, '');
-    finalCountryCity[count] = cityes;
-  })
+  array.forEach((obj) => {
+    Object.keys(finalCountryCity).includes(obj.country) ? 
+      finalCountryCity[`${obj.country}`].push(obj.city) 
+      : finalCountryCity[`${obj.country}`] = [obj.city];
+  });
   return finalCountryCity;
 }
 
@@ -233,31 +230,31 @@ console.log(countryCity(hotels));
 //Calendar
 
 
-function getCalendarMonth ( daysInMonth, daysInWeek, dayOfWeek ) {
-  let day = 1;
-  let amountWeekInMonth = (daysInMonth + (dayOfWeek - 1)) % daysInWeek === 0 ? (daysInMonth + (dayOfWeek - 1)) / daysInWeek : ((daysInWeek - (daysInMonth + (dayOfWeek - 1)) % daysInWeek) + daysInMonth + (dayOfWeek - 1))/daysInWeek; 
+const getCalendarMonth = (daysInMonth, daysInWeek, dayOfWeek) => {
+  let amountDayInMonth = (daysInMonth + (dayOfWeek - 1)) % daysInWeek === 0 ? //Checking to see if there’s a moving week at the end
+    daysInMonth + (dayOfWeek - 1) // if not a week at the end
+    : (daysInWeek - (daysInMonth + (dayOfWeek - 1)) % daysInWeek + daysInMonth + (dayOfWeek - 1)); //If there is a week 
   let month = [];
   let weekOfCalendar = [];
-
-  for ( let week = 0; week < amountWeekInMonth; week++ ) {
-    for ( let weekDay = 0; weekDay < daysInWeek; weekDay++ ) {
-      if (day <= (dayOfWeek - 1)) {
-        weekOfCalendar.push(daysInMonth - (dayOfWeek-1) + day);
-        day++;
-      } else if (day <= (daysInMonth + (dayOfWeek-1))) {
-        weekOfCalendar.push(day - (dayOfWeek - 1));
-        day++;
-      } else {
-        weekOfCalendar.push(day - (dayOfWeek - 1) - daysInMonth);
-        day++;
-      }
-    }
-    month.push(weekOfCalendar);
-    weekOfCalendar = [];
+  
+  if (dayOfWeek > daysInWeek) { 
+    return console.log('Err: the wrong dayOfWeek')
   }
 
-  console.log(month);
+  for (let day = 1; day <= amountDayInMonth; day++) {
+    if (day <= dayOfWeek - 1) {
+      weekOfCalendar.push(daysInMonth - (dayOfWeek-1) + day);
+    } else if (day <= daysInMonth + (dayOfWeek-1)) {
+      weekOfCalendar.push(day - (dayOfWeek - 1));
+    } else {
+      weekOfCalendar.push(day - (dayOfWeek - 1) - daysInMonth);
+    }
+    if (weekOfCalendar.length === daysInWeek) {
+      month.push(weekOfCalendar);
+      weekOfCalendar = [];
+    }
+  }
+  return month;
 }
 
-getCalendarMonth(30, 7, 7);
-
+console.log(getCalendarMonth(30, 7, 7));
