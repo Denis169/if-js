@@ -36,11 +36,11 @@ const deepEqual = (object1, object2 ) => {
    return false;
   }
   for(let key of Object.keys(object1)) {
-    if (! Object.keys(object2).includes(key)) { 
+    if (!Object.keys(object2).includes(key)) { 
       return false;
     }
     if(object1[key] !== object2[key]){ 
-      if(! deepEqual(object1[key], object2[key]) ){ 
+      if(!deepEqual(object1[key], object2[key]) ){ 
         return false;
       }
     }
