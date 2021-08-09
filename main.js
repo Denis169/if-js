@@ -216,13 +216,12 @@ const hotels = [
 ];
 
 const countryCity = (array) => {
-  let finalCountryCity = new Object();
-  array.forEach((obj) => {
-    Object.keys(finalCountryCity).includes(obj.country) ? 
-      finalCountryCity[`${obj.country}`].push(obj.city) 
+  return array.reduce((finalCountryCity, obj) => {
+    Object.keys(finalCountryCity).includes(obj.country) ?
+      finalCountryCity[`${obj.country}`].push(obj.city)
       : finalCountryCity[`${obj.country}`] = [obj.city];
-  });
-  return finalCountryCity;
+    return finalCountryCity;
+  }, {});
 }
 
 console.log(countryCity(hotels));
