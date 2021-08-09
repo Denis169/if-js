@@ -1,26 +1,59 @@
-// Return of the amount
-const sum = (a) => (b) => a + b;
+// Date format conversion
 
-console.log(sum(5)(2));
+const dataFirst = '2020-11-26';
 
-// Coloring text <p>
+const dateFormatConversion = (date) => date.replace(/^(\d{4})-(\d{2})-(\d{2})$/, '$3.$2.$1');
 
-const colorsForText = ['magenta', 'cyan', 'firebrick', 'springgreen', 'skyblue'];
+console.log(dateFormatConversion(dataFirst));
 
-const elemTextFirst = document.getElementById('text_1');
-const elemTextTwo = document.getElementById('text_2');
-const elemTextThree = document.getElementById('text_3');
+// Search for accommodation facilities
 
-const changeColor = () => {
-  let count = 0;
-  return (event) => {
-    event.target.style.color = colorsForText[count];
-    count === colorsForText.length ? count = 0 : count++;
-  };
-};
+const data = [
+  {
+    country: 'Russia',
+    city: 'Saint Petersburg',
+    hotel: 'Hotel Leopold',
+  },
+  {
+    country: 'Spain',
+    city: 'Santa Cruz de Tenerife',
+    hotel: 'Apartment Sunshine',
+  },
+  {
+    country: 'Slowakia',
+    city: 'Vysokie Tatry',
+    hotel: 'Villa Kunerad',
+  },
+  {
+    country: 'Germany',
+    city: 'Berlin',
+    hotel: 'Hostel Friendship',
+  },
+  {
+    country: 'Indonesia',
+    city: 'Bali',
+    hotel: 'Ubud Bali Resort&SPA',
+  },
+  {
+    country: 'Netherlands',
+    city: 'Rotterdam',
+    hotel: 'King Kong Hostel',
+  },
+  {
+    country: 'Marocco',
+    city: 'Ourika',
+    hotel: 'Rokoko Hotel',
+  },
+  {
+    country: 'Germany',
+    city: 'Berlin',
+    hotel: 'Hotel Rehberge Berlin Mitte',
+  },
+];
 
-elemTextFirst.addEventListener('click', changeColor());
-elemTextTwo.addEventListener('click', changeColor());
-elemTextThree.addEventListener('click', changeColor());
-
-
+const filterPrices = (array, value) => {
+  value = new RegExp(value,'igm');
+  return array.reduce((acc, obj) => value.test(Object.values(obj)) ? acc + `${Object.values(obj).join(', ')}\n` : acc, []);
+}
+  
+console.log(filterPrices(data, 'Germany'));
