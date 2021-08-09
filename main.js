@@ -35,7 +35,7 @@ const deepEqual = (object1, object2 ) => {
   if  (Object.keys(object1).length !== Object.keys(object2).length) {
    return false;
   }
-  for(var key in object1) {
+  for(let key in object1) {
     if (! Object.keys(object2).includes(key)) { 
       return false;
     }
