@@ -1,55 +1,55 @@
-// // Deep Equal
+// Deep Equal
 
-// const obj1 = {
-//   a: 'a',
-//   b: {
-//     a: 'a',
-//     b: 'b',
-//     c: {
-//       a: 1,
-//     },
-//   },
-// };
-// const obj2 = {
-//   b: {
-//     c: {
-//       a: 1,
-//     },
-//     b: 'b',
-//     a: 'a',
-//   },
-//   a: 'a',
-// };
-// const obj3 = {
-//   a: {
-//     c: {
-//       a: 'a',
-//     },
-//     b: 'b',
-//     a: 'a',
-//   },
-//   b: 'b',
-// };
+const obj1 = {
+  a: 'a',
+  b: {
+    a: 'a',
+    b: 'b',
+    c: {
+      a: 1,
+    },
+  },
+};
+const obj2 = {
+  b: {
+    c: {
+      a: 1,
+    },
+    b: 'b',
+    a: 'a',
+  },
+  a: 'a',
+};
+const obj3 = {
+  a: {
+    c: {
+      a: 'a',
+    },
+    b: 'b',
+    a: 'a',
+  },
+  b: 'b',
+};
 
-// const deepEqual = (object1, object2 ) => {
-//   if  (Object.keys(object1).length !== Object.keys(object2).length) {
-//    return false;
-//   }
-//   for(var key in object1) {
-//     if (! Object.keys(object2).includes(key)) { 
-//       return false;
-//     }
-//     if(object1[key] !== object2[key]){ 
-//       if(! deepEqual(object1[key], object2[key]) ){ 
-//         return false;
-//       }
-//     }
-//   }
-//   return true;
-// };
+const deepEqual = (object1, object2 ) => {
+  if  (Object.keys(object1).length !== Object.keys(object2).length) {
+   return false;
+  }
+  for(var key in object1) {
+    if (! Object.keys(object2).includes(key)) { 
+      return false;
+    }
+    if(object1[key] !== object2[key]){ 
+      if(! deepEqual(object1[key], object2[key]) ){ 
+        return false;
+      }
+    }
+  }
+  return true;
+};
 
-// console.log(deepEqual(obj1, obj2));
-// console.log(deepEqual(obj1, obj3));
+console.log(deepEqual(obj1, obj2));
+console.log(deepEqual(obj1, obj3));
 
 
 //Calendar
