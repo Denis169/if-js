@@ -217,8 +217,8 @@ const hotels = [
 
 const countryCity = (array) => {
   return array.reduce((finalCountryCity, obj) => {
-    Object.keys(finalCountryCity).includes(obj.country) ?
-      finalCountryCity[`${obj.country}`].push(obj.city)
+    Object.keys(finalCountryCity).includes(obj.country) 
+      ? finalCountryCity[`${obj.country}`].push(obj.city)
       : finalCountryCity[`${obj.country}`] = [obj.city];
     return finalCountryCity;
   }, {});
@@ -256,4 +256,4 @@ const getCalendarMonth = (daysInMonth, daysInWeek, dayOfWeek) => {
   return month;
 }
 
-console.log(getCalendarMonth(30, 7, 7));
+console.log(getCalendarMonth(10, 10, 10));
