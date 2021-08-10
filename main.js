@@ -1,22 +1,11 @@
-// Palindrom in one line
+// Palindrom
 
 const palindrom = (word) => word === word.split('').reverse().join('');
   
 console.log(palindrom('atata'));
 
 // Search of object placement
-
 const data = [
-  {
-    country: 'Russia',
-    city: 'Saint Petersburg',
-    hotel: 'Hotel Leopold',
-  },
-  {
-    country: 'Spain',
-    city: 'Santa Cruz de Tenerife',
-    hotel: 'Apartment Sunshine',
-  },
   {
     country: 'Slowakia',
     city: 'Vysokie Tatry',
