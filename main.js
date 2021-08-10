@@ -230,8 +230,8 @@ console.log(countryCity(hotels));
 
 
 const getCalendarMonth = (daysInMonth, daysInWeek, dayOfWeek) => {
-  let amountDayInMonth = (daysInMonth + (dayOfWeek - 1)) % daysInWeek === 0 ? //Checking to see if there’s a moving week at the end
-    daysInMonth + (dayOfWeek - 1) // if not a week at the end
+  let amountDayInMonth = (daysInMonth + (dayOfWeek - 1)) % daysInWeek === 0 //Checking to see if there’s a moving week at the end
+    ? daysInMonth + (dayOfWeek - 1) // if not a week at the end
     : (daysInWeek - (daysInMonth + (dayOfWeek - 1)) % daysInWeek + daysInMonth + (dayOfWeek - 1)); //If there is a week 
   let month = [];
   let weekOfCalendar = [];
