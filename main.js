@@ -46,14 +46,22 @@ class Student extends User {
 
 class Students {
   constructor(studentsData) {
-    return studentsData.reduce((acc, obj) => {
+    this.arrStudents = [];
+    studentsData.forEach((obj) => {
       let [firstName, lastname, admissionYear, courseName] = Object.values(obj);
-      return {... new Student(firstName, lastname, admissionYear, courseName)};
-    }, []);
+      this.arrStudents.push({... new Student(firstName, lastname, admissionYear, courseName)});
+    });
+    this.arrStudents.sort((a, b) => a.course > b.course ? 1: -1);
+  }
+
+  getInfo() {
+    let getInfo = [];
+    this.arrStudents.forEach((obj) => getInfo.push(`${obj.fullName} - ${obj.courseName}, ${obj.course} курс`));
+    return getInfo;
   }
 }
 
 
 
 const students = new Students(studentsData);
-console.log(students);
+console.log(students.getInfo());
