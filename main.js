@@ -34,7 +34,7 @@ class User {
   }
 
   get fullName() {
-    return  `${this.firstName}` + ` ` + `${this.lastName}`;
+    return  this.firstName + ` ` + this.lastName;
   }
 }
 
