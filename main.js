@@ -31,7 +31,10 @@ class User {
   constructor(firstName, lastname) {
     this.firstName = firstName;
     this.lastName = lastname;
-    this.fullName = `${this.firstName}` + ` ` + `${this.lastName}`;
+  }
+
+  get fullName() {
+    return  `${this.firstName}` + ` ` + `${this.lastName}`;
   }
 }
 
@@ -40,14 +43,18 @@ class Student extends User {
     super(firstName, lastname);
     this.admissionYear = admissionYear;
     this.courseName = courseName;
-    this.course = new Date().getFullYear() - this.admissionYear;
+  }
+  get course() {
+    return new Date().getFullYear() - this.admissionYear;
   }
 }
 
 class Students {
   constructor(studentsData) {
     this.arrStudents = studentsData.reduce((arrStudents, obj) => {
-      arrStudents.push({... new Student(obj.firstName, obj.lastName, obj.admissionYear, obj.courseName)});
+      arrStudents.push({... new Student(obj.firstName, obj.lastName, obj.admissionYear, obj.courseName), 
+        course: new Student('','', obj.admissionYear,'').course,
+        fullName: new User(obj.firstName, obj.lastName).fullName});
       arrStudents.sort((a, b) => a.course > b.course ? 1: -1);
       return arrStudents;
     }, []);
