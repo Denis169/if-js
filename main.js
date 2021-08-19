@@ -34,7 +34,7 @@ class User {
   }
 
   get fullName() {
-    return  this.firstName + ` ` + this.lastName;
+    return  `${this.firstName} ${this.lastName}`;
   }
 }
 
@@ -51,18 +51,12 @@ class Student extends User {
 
 class Students {
   constructor(studentsData) {
-    this.arrStudents = studentsData.reduce((arrStudents, obj) => {
-      arrStudents.push({... new Student(obj.firstName, obj.lastName, obj.admissionYear, obj.courseName), 
-        course: new Student('','', obj.admissionYear,'').course,
-        fullName: new User(obj.firstName, obj.lastName).fullName});
-      arrStudents.sort((a, b) => a.course > b.course ? 1: -1);
-      return arrStudents;
-    }, []);
   }
 
   getInfo() {
-    return this.arrStudents.reduce((getInfo, obj) => {
-      getInfo.push(`${obj.fullName} - ${obj.courseName}, ${obj.course} курс`);
+    return studentsData.reduce((getInfo, obj) => {
+      getInfo.push(`${new User(obj.firstName, obj.lastName).fullName} - ${obj.courseName}, ${new Student('','', obj.admissionYear,'').course} курс`);
+      getInfo.sort((a, b) => a.match(/\d/igm) > b.match(/\d/igm) ? 1: -1);
       return getInfo;
     }, []);
   }
