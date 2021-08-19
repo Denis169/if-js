@@ -1,113 +1,66 @@
-// Deep Equal
+// Classes
 
-const obj1 = {
-  a: 'a',
-  b: {
-    a: 'a',
-    b: 'b',
-    c: {
-      a: 1,
-    },
+const studentsData = [
+  {
+    firstName: 'Василий',
+    lastName: 'Петров',
+    admissionYear: 2019,
+    courseName: 'Java',
   },
-};
-const obj2 = {
-  b: {
-    c: {
-      a: 1,
-    },
-    b: 'b',
-    a: 'a',
+  {
+    firstName: 'Иван',
+    lastName: 'Иванов',
+    admissionYear: 2018,
+    courseName: 'JavaScript',
   },
-  a: 'a',
-};
-const obj3 = {
-  a: {
-    c: {
-      a: 'a',
-    },
-    b: 'b',
-    a: 'a',
+  {
+    firstName: 'Александр',
+    lastName: 'Федоров',
+    admissionYear: 2017,
+    courseName: 'Python',
   },
-  b: 'b',
-};
-
-const deepEqual = (object1, object2 ) => {
-  if  (Object.keys(object1).length !== Object.keys(object2).length) return false;
-  for(let key of Object.keys(object1)) {
-    if (!Object.keys(object2).includes(key)) return false;
-    if (Array.isArray(object1[`${key}`]) || Array.isArray(object2[`${key}`])) return 'The passed objects have an array. Execution is impossible.';
-    if(object1[key] !== object2[key] && !deepEqual(object1[key], object2[key])) return false;
+  {
+    firstName: 'Николай',
+    lastName: 'Петров',
+    admissionYear: 2019,
+    courseName: 'Android',
   }
-  return true;
-};
+];
 
-console.log(deepEqual(obj1, obj2));
-console.log(deepEqual(obj1, obj3));
-
-
-//Calendar
-const dateUser = {
-  checkInDate: 28,
-  checkInDateInMonth: false,
-  checkOutDate: 10,
-  checkOutDateInMonth: true,
-};
-
-const getCalendarMonth = (daysInMonth, daysInWeek, dayOfWeek, daysUser) => {
-  let amountDayInMonth = (daysInMonth + (dayOfWeek - 1)) % daysInWeek === 0 //Checking to see if there’s a moving week at the end
-    ? daysInMonth + (dayOfWeek - 1) // if not a week at the end
-    : (daysInWeek - (daysInMonth + (dayOfWeek - 1)) % daysInWeek + daysInMonth + (dayOfWeek - 1)); //If there is a week 
-  let month = [];
-  let weekOfCalendar = [];
-  let dataDay = {};
-  
-  if (dayOfWeek > daysInWeek) { 
-    return console.log('Err: the wrong dayOfWeek')
+class User {
+  constructor(firstName, lastname) {
+    this.firstName = firstName;
+    this.lastName = lastname;
   }
 
-  for (let day = 1; day <= amountDayInMonth; day++) {
-    if (day <= dayOfWeek - 1) {
-      dataDay.dayOfMonth = daysInMonth - (dayOfWeek-1) + day;
-      dataDay.notCurrentMonth = true;
-      if (daysUser.checkInDateInMonth) {
-        dataDay.selectedDay = false;
-      } else {
-        daysUser.checkInDate <= dataDay.dayOfMonth ? dataDay.selectedDay = true : dataDay.selectedDay = false;
-      }
-    weekOfCalendar.push(dataDay);
-    dataDay = {};
-
-    } else if (day <= daysInMonth + (dayOfWeek-1)) {
-      dataDay.dayOfMonth = day - (dayOfWeek - 1);
-      dataDay.notCurrentMonth = false;
-      if (!daysUser.checkInDateInMonth && !daysUser.checkOutDateInMonth){
-        dataDay.selectedDay = true;
-      } else if (daysUser.checkOutDateInMonth) {
-        dataDay.dayOfMonth <= daysUser.checkOutDate ? dataDay.selectedDay = true : dataDay.selectedDay = false;
-      } else {
-        dataDay.dayOfMonth >= daysUser.checkInDate ? dataDay.selectedDay = true : dataDay.selectedDay = false;
-      }
-      weekOfCalendar.push(dataDay);
-      dataDay = {};
-    
-    } else {
-      dataDay.dayOfMonth = day - (dayOfWeek - 1) - daysInMonth;
-      dataDay.notCurrentMonth = true;
-      if (daysUser.checkOutDateInMonth) {
-        dataDay.selectedDay = false;
-      } else {
-        dataDay.dayOfMonth <= daysUser.checkOutDate ? dataDay.selectedDay = true : dataDay.selectedDay = false;
-      }
-      weekOfCalendar.push(dataDay);
-      dataDay = {};
-    }
-
-    if (weekOfCalendar.length === daysInWeek) {
-      month.push(weekOfCalendar);
-      weekOfCalendar = [];
-    }
+  get fullName() {
+    return  `${this.firstName} ${this.lastName}`;
   }
-  return month;
 }
 
-console.log(getCalendarMonth(30, 7, 7, dateUser));
+class Student extends User {
+  constructor(firstName, lastname, admissionYear, courseName) {
+    super(firstName, lastname);
+    this.admissionYear = admissionYear;
+    this.courseName = courseName;
+  }
+  get course() {
+    return new Date().getFullYear() - this.admissionYear;
+  }
+}
+
+class Students {
+  constructor() {
+  }
+
+  getInfo() {
+    return studentsData.reduce((getInfo, obj) => {
+      getInfo.push(`${new User(obj.firstName, obj.lastName).fullName} - ${obj.courseName}, ${new Student('','', obj.admissionYear,'').course} курс`);
+      getInfo.sort((a, b) => a.match(/\d/igm) > b.match(/\d/igm) ? 1: -1);
+      return getInfo;
+    }, []);
+  }
+}
+
+const students = new Students(studentsData);
+console.log(students.getInfo());
