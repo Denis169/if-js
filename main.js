@@ -50,7 +50,7 @@ class Student extends User {
 }
 
 class Students {
-  constructor(studentsData) {
+  constructor() {
   }
 
   getInfo() {
