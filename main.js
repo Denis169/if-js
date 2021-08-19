@@ -62,7 +62,5 @@ class Students {
   }
 }
 
-
-
 const students = new Students(studentsData);
 console.log(students.getInfo());
