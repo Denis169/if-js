@@ -47,6 +47,10 @@ const dateUser = {
   checkOutDate: 10,
   checkOutDateInMonth: true,
 };
+let startDayWeek = getDay(new Date(new Date().getFullYear(), new Date().getMonth(), 1)) === 0 
+? 7
+: getDay(new Date(new Date().getFullYear(), new Date().getMonth(), 1));
+
 
 const getCalendarMonth = (daysInMonth, daysInWeek, dayOfWeek, daysUser) => {
   let amountDayInMonth = (daysInMonth + (dayOfWeek - 1)) % daysInWeek === 0 //Checking to see if there’s a moving week at the end
@@ -55,6 +59,7 @@ const getCalendarMonth = (daysInMonth, daysInWeek, dayOfWeek, daysUser) => {
   let month = [];
   let weekOfCalendar = [];
   let dataDay = {};
+  
 
   for (let day = 1; day <= amountDayInMonth; day++) {
     if (day <= dayOfWeek - 1) {
@@ -103,10 +108,6 @@ const getCalendarMonth = (daysInMonth, daysInWeek, dayOfWeek, daysUser) => {
   }
   return month;
 }
-
-let startDayWeek = getDay(new Date(new Date().getFullYear(), new Date().getMonth(), 1)) === 0 
-  ? 7
-  : getDay(new Date(new Date().getFullYear(), new Date().getMonth(), 1));
 
 console.log(getCalendarMonth(getDaysInMonth(new Date()), 7, startDayWeek, dateUser));
 
