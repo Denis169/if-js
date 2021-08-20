@@ -34,3 +34,79 @@ const changeColor = () => {
 elemTextFirst.addEventListener('click', changeColor());
 elemTextTwo.addEventListener('click', changeColor());
 elemTextThree.addEventListener('click', changeColor());
+
+
+//Calendar
+import { getDaysInMonth } from 'date-fns';
+import { getDay } from 'date-fns';
+
+const dateUser = {
+  checkInDate: 28,
+  checkInDateInMonth: false,
+  checkOutDate: 10,
+  checkOutDateInMonth: true,
+};
+
+const getCalendarMonth = (daysInMonth, daysInWeek, dayOfWeek, daysUser) => {
+  let amountDayInMonth = (daysInMonth + (dayOfWeek - 1)) % daysInWeek === 0 //Checking to see if there’s a moving week at the end
+    ? daysInMonth + (dayOfWeek - 1) // if not a week at the end
+    : (daysInWeek - (daysInMonth + (dayOfWeek - 1)) % daysInWeek + daysInMonth + (dayOfWeek - 1)); //If there is a week 
+  let month = [];
+  let weekOfCalendar = [];
+  let dataDay = {};
+  
+  if (dayOfWeek > daysInWeek) { 
+    return console.log('Err: the wrong dayOfWeek')
+  }
+
+  for (let day = 1; day <= amountDayInMonth; day++) {
+    if (day <= dayOfWeek - 1) {
+      dataDay.dayOfMonth = daysInMonth - (daysInWeek + dayOfWeek-1) + day;
+      dataDay.notCurrentMonth = true;
+      if (daysUser.checkInDateInMonth) {
+        dataDay.selectedDay = false;
+      } else {
+        daysUser.checkInDate <= dataDay.dayOfMonth ? dataDay.selectedDay = true : dataDay.selectedDay = false;
+      }
+    weekOfCalendar.push(dataDay);
+    dataDay = {};
+
+    } else if (day <= daysInMonth + (dayOfWeek-1)) {
+      dataDay.dayOfMonth = day - (dayOfWeek - 1);
+      dataDay.notCurrentMonth = false;
+      if (!daysUser.checkInDateInMonth && !daysUser.checkOutDateInMonth){
+        dataDay.selectedDay = true;
+      } else if (daysUser.checkOutDateInMonth) {
+        dataDay.dayOfMonth <= daysUser.checkOutDate ? dataDay.selectedDay = true : dataDay.selectedDay = false;
+      } else {
+        dataDay.dayOfMonth >= daysUser.checkInDate ? dataDay.selectedDay = true : dataDay.selectedDay = false;
+      }
+      weekOfCalendar.push(dataDay);
+      dataDay = {};
+    
+    } else {
+      dataDay.dayOfMonth = day - (dayOfWeek - 1) - daysInMonth;
+      dataDay.notCurrentMonth = true;
+      if (daysUser.checkOutDateInMonth) {
+        dataDay.selectedDay = false;
+      } else {
+        dataDay.dayOfMonth <= daysUser.checkOutDate ? dataDay.selectedDay = true : dataDay.selectedDay = false;
+      }
+      weekOfCalendar.push(dataDay);
+      dataDay = {};
+    }
+
+    if (weekOfCalendar.length === daysInWeek) {
+      month.push(weekOfCalendar);
+      weekOfCalendar = [];
+    }
+  }
+  return month;
+}
+
+let startDayWeek = getDay(new Date(new Date().getFullYear(), new Date().getMonth(), 1)) === 0
+  ? 7
+  : getDay(new Date(new Date().getFullYear(), new Date().getMonth(), 1));
+
+console.log(getCalendarMonth(getDaysInMonth(new Date()), 7, startDayWeek, dateUser));
+
