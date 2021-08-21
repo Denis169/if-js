@@ -106,7 +106,6 @@ const getCalendarMonth = (daysInMonth, daysInWeek, dayOfWeek, daysUser) => {
       weekOfCalendar = [];
     }
   }
-  return month;
 }
 
 console.log(getCalendarMonth(getDaysInMonth(new Date()), 7, startDayWeek, dateUser));
