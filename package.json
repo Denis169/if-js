@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "My fist js",
   "main": "main.js",
+  "type": "module",
   "scripts": {
     "test": "jest",
     "lint": "eslint --fix main.js",
@@ -22,5 +23,8 @@
     "eslint": "^7.30.0",
     "husky": "^7.0.1",
     "jest": "^27.0.6"
+  },
+  "dependencies": {
+    "date-fns": "^2.23.0"
   }
 }
