@@ -52,44 +52,46 @@ const data = [
 ];
 
 let count = 0;
-let countLeft = data.length-1;
+let countLeft = data.length - 1;
 
 const sliderRight = document.querySelector('.homes__svg_arrow-right__js');
 const sliderLeft = document.querySelector('.homes__svg_arrow-left__js');
 
-const addNewElement = (counter) =>{
+const addNewElement = (counter) => {
   const newDiv =  document.createElement('div');
   newDiv.setAttribute('class', 'homes__col__js');
   newDiv.innerHTML = `
-  <img class="homes__images" src="${data[counter].imageUrl}" alt="Hotel">
-  <a class="homes__link" href="">${data[counter].name}</a>
-  <p class="homes__text">${data[counter].city}, ${data[counter].country}</p>
+    <img class="homes__images" src="${data[counter].imageUrl}" alt="Hotel">
+    <a class="homes__link" href="">${data[counter].name}</a>
+    <p class="homes__text">${data[counter].city}, ${data[counter].country}</p>
   `;
   return newDiv;
 }
 
-for (let i = 0; i <= 3; i++) {
-  document.querySelector('.homes__section-col__js').append(addNewElement(i));
-  count = i+1;
+const blockFilling = () => {
+  for (let i = 0; i <= 3; i++) {
+    document.querySelector('.homes__section-col__js').append(addNewElement(i));
+    count = i + 1;
+  }
 }
 
 
-const changeColRight = () =>{
+const changeColRight = () => {
   document.querySelector('.homes__section-col__js').removeChild(document.querySelector('.homes__section-col__js').firstElementChild);
   document.querySelector('.homes__section-col__js').append(addNewElement(count));
-  count === data.length-1 ? count=0 : count++;
-  countLeft === data.length-1 ? countLeft=0 : countLeft++;
+  count === data.length - 1 ? count = 0 : count++;
+  countLeft === data.length - 1 ? countLeft = 0 : countLeft++;
 }
 
 
-const changeColLeft = () =>{
+const changeColLeft = () => {
   document.querySelector('.homes__section-col__js').removeChild(document.querySelector('.homes__section-col__js').lastElementChild);
   document.querySelector('.homes__section-col__js').prepend(addNewElement(countLeft));
-  countLeft === 0 ? countLeft = data.length-1 : countLeft--;
-  count === 0 ? count=data.length-1 : count--;
+  countLeft === 0 ? countLeft = data.length - 1 : countLeft--;
+  count === 0 ? count = data.length - 1 : count--;
 }
 
-
+blockFilling();
 sliderRight.addEventListener('click', changeColRight);
 sliderLeft.addEventListener('click', changeColLeft);
 
