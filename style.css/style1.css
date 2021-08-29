@@ -158,7 +158,77 @@ h1 {
 
 .header__input-adults-block {
   flex-basis: 26%;
+  position: relative;
 }
+
+.header__filter__people {
+  display: none;
+  position: absolute;
+  width: 82%;
+  top: 75px;
+  right: 0px;
+  border-radius: 8px;
+  background-color: var(--white);
+}
+
+.header__filter__counters {
+  height: 114px;
+  margin: 22px;
+  display: flex;
+  flex-direction:column;
+  justify-content: space-between;
+}
+
+.header__filter__adults,
+.header__filter__children,
+.header__filter__room {
+  display: flex;
+  justify-content: space-between;
+}
+
+.header__filter__adults p,
+.header__filter__children p,
+.header__filter__room p {
+  font-size: 16px;
+  line-height: 30px;
+  vertical-align: middle;
+}
+
+.header__filter__counter {
+ display: flex;
+ justify-content: space-between;
+ width: 108px;
+}
+
+.header__filter__counter p:first-of-type, .header__filter__counter p:last-of-type {
+  border: 1px solid var(--primary);
+  width: 30px;
+  height: 30px;
+  font-size: 20px;
+  line-height: 25px;
+  color: var(--primary);
+  text-align: center;
+  cursor: pointer;
+}
+
+.header__filter__childrens__age {
+  margin: 28px 22px 22px 19px;
+}
+
+.header__filter__childrens__age p {
+  font-size: 12px;
+  line-height: 14px;
+}
+
+.header__filter__childrens__age select {
+  border: 1px solid var(--primary);
+  font-size: 12px;
+  line-height: 14px;
+  margin-top: 12px;
+  width: 99px;
+  height: 30px;
+}
+
 
 .header__input-button-block {
   flex-basis: 16%;

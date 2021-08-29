@@ -1,3 +1,53 @@
+// Header
+const adultsChildrenRooms = document.querySelector('.header__input-adults-block__js');
+const body = document.querySelector('body');
+const plusAdults = document.querySelector('.header__plus__adults__js');
+const minusAdults = document.querySelector('.header__minus__adults__js');
+let countAdults = 2;
+let countChildren = 2;
+let countRooms = 2;
+
+
+const choosePeopleOn = (event) => {
+  document.querySelector('.header__filter__people__js').style.display = 'inline';
+  event.stopPropagation();
+}
+
+const choosePeopleOf = (event) => {
+  document.querySelector('.header__filter__people__js').style.display = 'none';
+  event.stopPropagation();
+}
+
+const moreAdults = (event) => {
+  if (countAdults < 30) {
+    countAdults++;
+    if (countAdults === 30) document.querySelector('.header__plus__adults__js').style.border = '1px solid var(--secondary-text)';
+    if (countAdults !== 0) document.querySelector('.header__minus__adults__js').style.border = '1px solid var(--primary)';
+  } else {    
+    countAdults;
+  }
+  document.querySelector('.header__adults__quantity__js').innerHTML = `${countAdults}`;
+  document.querySelector('.input-adults').setAttribute('placeholder', `${countAdults} Adults - ${countChildren} Children - ${countRooms} Rooms`);
+}
+
+const smollerAdults = (event) => {
+  if (countAdults > 0) { 
+    countAdults--;
+    if (countAdults !== 30) document.querySelector('.header__plus__adults__js').style.border = '1px solid var(--primary)';
+    if (countAdults === 0) document.querySelector('.header__minus__adults__js').style.border = '1px solid var(--secondary-text)';
+  } else {
+    countAdults;
+  }
+  document.querySelector('.header__adults__quantity__js').innerHTML = `${countAdults}`;
+  document.querySelector('.input-adults').setAttribute('placeholder', `${countAdults} Adults - ${countChildren} Children - ${countRooms} Rooms`);
+}
+
+adultsChildrenRooms.addEventListener('click', choosePeopleOn);
+body.addEventListener('click', choosePeopleOf);
+plusAdults.addEventListener('click', moreAdults);
+minusAdults.addEventListener('click', smollerAdults)
+
+
 // Homes guests loves
 
 const data = [
