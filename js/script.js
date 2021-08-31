@@ -1,12 +1,16 @@
 // Header
 const adultsChildrenRooms = document.querySelector('.header__input-adults-block__js');
 const body = document.querySelector('body');
-const plusAdults = document.querySelector('.header__plus__adults__js');
 const minusAdults = document.querySelector('.header__minus__adults__js');
-let countAdults = 2;
-let countChildren = 2;
-let countRooms = 2;
+const plusAdults = document.querySelector('.header__plus__adults__js');
+const minusChildren = document.querySelector('.header__minus__children__js');
+const plusChildren = document.querySelector('.header__plus__children__js');
+const minusRoom = document.querySelector('.header__minus__room__js');
+const plusRoom = document.querySelector('.header__plus__room__js');
 
+let countAdults = 2;
+let countChildren = 0;
+let countRooms = 1;
 
 const choosePeopleOn = (event) => {
   document.querySelector('.header__filter__people__js').style.display = 'inline';
@@ -18,34 +22,91 @@ const choosePeopleOf = (event) => {
   event.stopPropagation();
 }
 
-const moreAdults = (event) => {
-  if (countAdults < 30) {
-    countAdults++;
-    if (countAdults === 30) document.querySelector('.header__plus__adults__js').style.border = '1px solid var(--secondary-text)';
-    if (countAdults !== 0) document.querySelector('.header__minus__adults__js').style.border = '1px solid var(--primary)';
-  } else {    
-    countAdults;
-  }
-  document.querySelector('.header__adults__quantity__js').innerHTML = `${countAdults}`;
-  document.querySelector('.input-adults').setAttribute('placeholder', `${countAdults} Adults - ${countChildren} Children - ${countRooms} Rooms`);
+const changePlaseholder = () => {
+  document.querySelector('.input__people__js').setAttribute('placeholder', `${countAdults} Adults - ${countChildren} Children - ${countRooms} Room`);
 }
 
-const smollerAdults = (event) => {
-  if (countAdults > 0) { 
-    countAdults--;
-    if (countAdults !== 30) document.querySelector('.header__plus__adults__js').style.border = '1px solid var(--primary)';
-    if (countAdults === 0) document.querySelector('.header__minus__adults__js').style.border = '1px solid var(--secondary-text)';
-  } else {
-    countAdults;
+const more = (event) => {
+  const count = (countVariant, max) => {
+    if (countVariant < max) {
+      countVariant++;
+      if (countVariant === max) event.target.setAttribute('id','no__activity__js');
+      if (countVariant !== 0) event.target.previousElementSibling.previousElementSibling.removeAttribute('id');
+    } else {
+      countVariant;
+    }
+    event.target.previousElementSibling.innerHTML = `${countVariant}`;
+    return countVariant;
   }
-  document.querySelector('.header__adults__quantity__js').innerHTML = `${countAdults}`;
-  document.querySelector('.input-adults').setAttribute('placeholder', `${countAdults} Adults - ${countChildren} Children - ${countRooms} Rooms`);
+  if (event.target.getAttribute('class') === 'header__plus__adults__js'){
+    countAdults = count(countAdults, 30);
+  } else if (event.target.getAttribute('class') === 'header__plus__children__js') {
+    countChildren = count(countChildren, 10);
+    if (countChildren === 1) {
+      document.querySelector('.header__filter__childrens__age__js').setAttribute('class','header__filter__childrens__age');
+    }
+    document.getElementById('header__childs__age').insertAdjacentHTML('beforeend',` 
+      <select>
+        <option>0 years old</option>
+        <option>1 years old</option>
+        <option>2 years old</option>
+        <option>3 years old</option>
+        <option>4 years old</option>
+        <option>5 years old</option>
+        <option>6 years old</option>
+        <option>7 years old</option>
+        <option>8 years old</option>
+        <option>9 years old</option>
+        <option>10 years old</option>
+        <option>11 years old</option>
+        <option>12 years old</option>
+        <option>13 years old</option>
+        <option>14 years old</option>
+        <option>15 years old</option>
+        <option>16 years old</option>
+        <option>17 years old</option>
+      </select>`);
+} else {
+    countRooms = count(countRooms, 30);
+  }
+  changePlaseholder();
+}
+
+const smoller = (event) => {
+  const count = (countVariant) => {
+    if (countVariant > 0) { 
+      countVariant--;
+      if (countVariant !== 30) event.target.nextElementSibling.nextElementSibling.removeAttribute('id');
+      if (countVariant === 0) event.target.setAttribute('id','no__activity__js');
+    } else {
+      countVariant;
+    }
+    event.target.nextElementSibling.innerHTML = `${countVariant}`;
+    
+    return countVariant;
+  }
+  if (event.target.getAttribute('class') === 'header__minus__adults__js'){
+    countAdults = count(countAdults);
+  } else if (event.target.getAttribute('class') === 'header__minus__children__js') {
+    countChildren = count(countChildren);
+    if (countChildren === 0) {
+      document.querySelector('.header__filter__childrens__age').setAttribute('class','header__filter__childrens__age header__filter__childrens__age__js');
+    }
+    document.getElementById('header__childs__age').removeChild(document.querySelector('select')); 
+  } else {
+    countRooms = count(countRooms);
+  };
+  changePlaseholder();
 }
 
 adultsChildrenRooms.addEventListener('click', choosePeopleOn);
 body.addEventListener('click', choosePeopleOf);
-plusAdults.addEventListener('click', moreAdults);
-minusAdults.addEventListener('click', smollerAdults)
+plusAdults.addEventListener('click', more);
+minusAdults.addEventListener('click', smoller);
+plusChildren.addEventListener('click', more);
+minusChildren.addEventListener('click', smoller);
+plusRoom.addEventListener('click', more);
+minusRoom.addEventListener('click', smoller);
 
 
 // Homes guests loves

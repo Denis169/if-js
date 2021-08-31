@@ -42,7 +42,6 @@
 /*header*/
 
 header {
-  overflow: hidden;
   background-color: var(--primary-dark);
   background-image: url(../image/castelmezzano-1979546\ 1.png);
   background-size: cover;
@@ -123,7 +122,7 @@ header {
 
 .header__top-section {
   margin-top: 200px;
-  margin-bottom: 120px;
+  margin-bottom: 150px;
 }
 
 h1 {
@@ -211,6 +210,15 @@ h1 {
   cursor: pointer;
 }
 
+#no__activity__js {
+  border: 1px solid var(--secondary-text);
+  color: var(--secondary-text);
+}
+
+.header__filter__childrens__age__js {
+  display: none;
+}
+
 .header__filter__childrens__age {
   margin: 28px 22px 22px 19px;
 }
@@ -221,6 +229,7 @@ h1 {
 }
 
 .header__filter__childrens__age select {
+  
   border: 1px solid var(--primary);
   font-size: 12px;
   line-height: 14px;
