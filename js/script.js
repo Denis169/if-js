@@ -12,6 +12,13 @@ let countAdults = 2;
 let countChildren = 0;
 let countRooms = 1;
 
+const select =  document.createElement('select');
+for (let i = 0; i < 17; i++) {
+  select.insertAdjacentHTML ('beforeend',`<option>${i + 1} years old</option>`);
+}
+
+console.log(select);
+
 const choosePeopleOn = (event) => {
   document.querySelector('.header__filter__people__js').style.display = 'inline';
   event.stopPropagation();
@@ -38,39 +45,23 @@ const more = (event) => {
     event.target.previousElementSibling.innerHTML = `${countVariant}`;
     return countVariant;
   }
+
   if (event.target.getAttribute('class') === 'header__plus__adults__js'){
     countAdults = count(countAdults, 30);
+
   } else if (event.target.getAttribute('class') === 'header__plus__children__js') {
     countChildren = count(countChildren, 10);
     if (countChildren === 1) {
       document.querySelector('.header__filter__childrens__age__js').setAttribute('class','header__filter__childrens__age');
     }
-    document.getElementById('header__childs__age').insertAdjacentHTML('beforeend',` 
-      <select>
-        <option>0 years old</option>
-        <option>1 years old</option>
-        <option>2 years old</option>
-        <option>3 years old</option>
-        <option>4 years old</option>
-        <option>5 years old</option>
-        <option>6 years old</option>
-        <option>7 years old</option>
-        <option>8 years old</option>
-        <option>9 years old</option>
-        <option>10 years old</option>
-        <option>11 years old</option>
-        <option>12 years old</option>
-        <option>13 years old</option>
-        <option>14 years old</option>
-        <option>15 years old</option>
-        <option>16 years old</option>
-        <option>17 years old</option>
-      </select>`);
-} else {
-    countRooms = count(countRooms, 30);
+    console.log(document.getElementById('header__childs__age'));
+    document.body.insertBefore(document.getElementById('children'), select); //Вот эта строчка где добавляем селект, непонятно почему не работает
+
+  } else {
+      countRooms = count(countRooms, 30);
+    }
+    changePlaseholder();
   }
-  changePlaseholder();
-}
 
 const smoller = (event) => {
   const count = (countVariant) => {
