@@ -12,12 +12,13 @@ let countAdults = 2;
 let countChildren = 0;
 let countRooms = 1;
 
-const select =  document.createElement('select');
-for (let i = 0; i < 17; i++) {
-  select.insertAdjacentHTML ('beforeend',`<option>${i + 1} years old</option>`);
+const addSelectChildren = () =>{
+  const select =  document.createElement('select');
+  for (let i = 0; i < 17; i++) {
+    select.insertAdjacentHTML ('beforeend',`<option>${i + 1} years old</option>`);
+  }
+  return select;
 }
-
-console.log(select);
 
 const choosePeopleOn = (event) => {
   document.querySelector('.header__filter__people__js').style.display = 'inline';
@@ -55,7 +56,7 @@ const more = (event) => {
       document.querySelector('.header__filter__childrens__age__js').setAttribute('class','header__filter__childrens__age');
     }
     
-    document.getElementById('header__childs__age').appendChild(select); //Вот эта строчка где добавляем селект, непонятно почему не работает
+    document.getElementById('header__childs__age').appendChild(addSelectChildren()); //Вот эта строчка где добавляем селект, непонятно почему не работает
 
   } else {
       countRooms = count(countRooms, 30);

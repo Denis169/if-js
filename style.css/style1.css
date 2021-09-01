@@ -229,11 +229,10 @@ h1 {
 }
 
 .header__filter__childrens__age select {
-  
   border: 1px solid var(--primary);
   font-size: 12px;
   line-height: 14px;
-  margin-top: 12px;
+  margin: 12px 4px 0 4px;
   width: 99px;
   height: 30px;
 }
