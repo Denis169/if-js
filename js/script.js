@@ -54,8 +54,8 @@ const more = (event) => {
     if (countChildren === 1) {
       document.querySelector('.header__filter__childrens__age__js').setAttribute('class','header__filter__childrens__age');
     }
-    console.log(document.getElementById('header__childs__age'));
-    document.body.insertBefore(document.getElementById('children'), select); //Вот эта строчка где добавляем селект, непонятно почему не работает
+    
+    document.getElementById('header__childs__age').appendChild(select); //Вот эта строчка где добавляем селект, непонятно почему не работает
 
   } else {
       countRooms = count(countRooms, 30);
