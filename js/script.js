@@ -1,4 +1,4 @@
-// Header
+// Header forma people
 const adultsChildrenRooms = document.querySelector('.header__input-adults-block__js');
 const body = document.querySelector('body');
 const minusAdults = document.querySelector('.header__minus__adults__js');
@@ -99,6 +99,30 @@ plusChildren.addEventListener('click', more);
 minusChildren.addEventListener('click', smoller);
 plusRoom.addEventListener('click', more);
 minusRoom.addEventListener('click', smoller);
+
+// Header calendar
+
+
+
+
+
+let countMonth = 1;
+
+const letMonth = (count) => {
+  let newMonth = new Date();
+  return new Date(newMonth.setMonth(newMonth.getMonth() + count));
+}
+
+const choseMonth = (count) => {
+  const nameMonth = document.createElement('p');
+  nameMonth.appendChild(document.createTextNode(`${letMonth(count).toLocaleDateString('en-us', { year: 'numeric', month: 'long'})}`));
+  nameMonth.setAttribute('class', 'header__month__year__js');
+  return nameMonth;
+}  
+
+document.querySelector('.header__first-month__js div:first-of-type').appendChild(choseMonth(0));
+
+document.querySelector('.header__second-month__js div:first-of-type').appendChild(choseMonth(countMonth));
 
 
 // Homes guests loves

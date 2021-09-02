@@ -155,6 +155,87 @@ h1 {
   position: relative;
 }
 
+.header__calendar__block {
+  position: absolute;
+  width: 580px;
+  height: 272px;
+  background-color: var(--white);
+  top: 75px;
+  border-radius: 8px;
+  display: flex;
+}
+
+.header__first-month, .header__second-month {
+  border-radius: 8px;
+  width: 290px;
+  height: 272px;
+  margin: 0 22px 18px 22px;
+}
+
+.header__first-month div, .header__second-month div {
+  display: flex;
+  justify-content: center;
+}
+
+.header__name__of__month {
+  margin: 12px 0 11px 0;
+}
+
+.header__month__year__js {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 21px;
+}
+
+.header__second-month {
+  position: relative;
+}
+
+.header__calendar-right, .header__calendar-left {
+  position: absolute;
+  height: 6px;
+  top: 18px;
+  cursor: pointer;
+}
+
+.header__calendar-right {
+  transform: rotate(270deg);
+  right: 30px;
+}
+
+.header__calendar-left {
+  transform: rotate(90deg);
+  left: 30px;
+}
+
+.header__name__day__of__week div {
+  width: 35px;
+  height: 35px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.header__day__of__week {
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 16px;
+  text-align: center;
+  color: var(--gray300);
+}
+
+
+
+
+
+
+
+
+
+
+
+
 .header__input-adults-block {
   flex-basis: 26%;
   position: relative;
@@ -296,7 +377,7 @@ h1 {
   padding-right: 8px;
 }
 
-@media only screen and (max-width: 768px){
+@media only screen and (max-width: 1120px){
   .header__svg-logo {
     width: 121.92px;
     height: 24px;
