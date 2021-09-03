@@ -1,39 +1,39 @@
-// Coloring text <p> 2 "First blood 2"
+// // Coloring text <p> 2 "First blood 2"
 
 
 
-const elemTextFirst = document.getElementById('text_1');
-const elemTextTwo = document.getElementById('text_2');
-const elemTextThree = document.getElementById('text_3');
+// const elemTextFirst = document.getElementById('text_1');
+// const elemTextTwo = document.getElementById('text_2');
+// const elemTextThree = document.getElementById('text_3');
 
-const changeColor = () => {
-  const colors = {
-    data: ['magenta', 'cyan', 'firebrick', 'springgreen', 'skyblue'],
-    [Symbol.iterator]() {
-      return this;
-    },
-    next() {
-      this.current++
-      if (this.current < this.data.length) {
-        return {
-          done: false,
-          value: this.data[this.current],
-        };
-      } else {
-        this.current = 0;
-        return {
-          done: true,
-          value: this.data[this.current],
-        };
-      }
-    }
-  };
-  return (event) => event.target.style.color = colors.next(colors).value;
-};
+// const changeColor = () => {
+//   const colors = {
+//     data: ['magenta', 'cyan', 'firebrick', 'springgreen', 'skyblue'],
+//     [Symbol.iterator]() {
+//       return this;
+//     },
+//     next() {
+//       this.current++
+//       if (this.current < this.data.length) {
+//         return {
+//           done: false,
+//           value: this.data[this.current],
+//         };
+//       } else {
+//         this.current = 0;
+//         return {
+//           done: true,
+//           value: this.data[this.current],
+//         };
+//       }
+//     }
+//   };
+//   return (event) => event.target.style.color = colors.next(colors).value;
+// };
 
-elemTextFirst.addEventListener('click', changeColor());
-elemTextTwo.addEventListener('click', changeColor());
-elemTextThree.addEventListener('click', changeColor());
+// elemTextFirst.addEventListener('click', changeColor());
+// elemTextTwo.addEventListener('click', changeColor());
+// elemTextThree.addEventListener('click', changeColor());
 
 
 //Calendar
@@ -47,10 +47,12 @@ const dateUser = {
   checkOutDate: 10,
   checkOutDateInMonth: true,
 };
+
 let startDayWeek = getDay(new Date(new Date().getFullYear(), new Date().getMonth(), 1)) === 0 
 ? 7
 : getDay(new Date(new Date().getFullYear(), new Date().getMonth(), 1));
 
+console.log(startDayWeek);
 
 const getCalendarMonth = (daysInMonth, daysInWeek, dayOfWeek, daysUser) => {
   let amountDayInMonth = (daysInMonth + (dayOfWeek - 1)) % daysInWeek === 0 //Checking to see if there’s a moving week at the end
@@ -60,7 +62,6 @@ const getCalendarMonth = (daysInMonth, daysInWeek, dayOfWeek, daysUser) => {
   let weekOfCalendar = [];
   let dataDay = {};
   
-
   for (let day = 1; day <= amountDayInMonth; day++) {
     if (day <= dayOfWeek - 1) {
       dataDay.dayOfMonth = daysInMonth - (daysInWeek + dayOfWeek - 1) + day;
@@ -106,6 +107,7 @@ const getCalendarMonth = (daysInMonth, daysInWeek, dayOfWeek, daysUser) => {
       weekOfCalendar = [];
     }
   }
+  return month;
 }
 
 console.log(getCalendarMonth(getDaysInMonth(new Date()), 7, startDayWeek, dateUser));
