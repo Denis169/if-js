@@ -92,6 +92,7 @@ const smoller = (event) => {
 }
 
 adultsChildrenRooms.addEventListener('click', choosePeopleOn);
+adultsChildrenRooms.addEventListener('click', checkInCheckOutOff);
 body.addEventListener('click', choosePeopleOf);
 plusAdults.addEventListener('click', more);
 minusAdults.addEventListener('click', smoller);
@@ -102,11 +103,149 @@ minusRoom.addEventListener('click', smoller);
 
 // Header calendar
 
+const nextMonthRight = document.querySelector('.header__calendar-right__js');
+const previousMonthLeft = document.querySelector('.header__calendar-left__js');
+const currentMonth = document.querySelector('.header__first-month__js');
+const currentMonthNext = document.querySelector('.header__second-month__js');
+const checkInCheckOut = document.querySelector('#date');
 
+const dateUser = {
+  checkInDate: 28,
+  checkInDateInMonth: false,
+  checkOutDate: 10,
+  checkOutDateInMonth: true,
+};
 
+let countFirstMonth = 0;
+let countSecondMonth = 1;
+let chooseDateCurrent = 0;
+let chooseDateCurrentEnd =63;
+let labelIn = 'Check-in';
+let labelOut = 'Check-out';
 
+const checkInCheckOutOn = (event) => {
+  document.querySelector('.header__calendar__block__js').style.display = 'flex';
+  event.stopPropagation();
+}
 
-let countMonth = 1;
+function checkInCheckOutOff(event) {
+  document.querySelector('.header__calendar__block__js').style.display = 'none';
+}
+
+const changePlaseholderDate = () => document.querySelector('#date').setAttribute('placeholder', `${labelIn} - ${labelOut}`);
+
+const сurrentMonth = (nextMonth) => {
+  const needDate = new Date((new Date()).getFullYear(), (new Date()).getMonth() + nextMonth, 1);
+  return needDate;
+}
+
+const whatStartDayWeek = (nextMonth) =>{
+  let needDate = new Date((new Date()).getFullYear(), (new Date()).getMonth() + nextMonth, 1);
+  let startDay = [7, 1, 2, 3, 4, 5, 6][(new Date(needDate.getFullYear(), needDate.getMonth(), 1)).getDay()];
+  return startDay;
+}
+
+const howMatchdaysInMonth = (nextMonth) => {
+  let needDate = new Date((new Date()).getFullYear(), (new Date()).getMonth() + nextMonth, 1);
+  let days = new Date(needDate.getFullYear(), needDate.getMonth() + 1, 0).getDate();
+  return days;
+}
+
+const getCalendarMonth = (daysInMonth, daysInWeek, dayOfWeek, daysUser) => {
+  let amountDayInMonth = (daysInMonth + (dayOfWeek - 1)) % daysInWeek === 0 //Checking to see if there’s a moving week at the end
+    ? daysInMonth + (dayOfWeek - 1) // if not a week at the end
+    :(daysInWeek - (daysInMonth + (dayOfWeek - 1)) % daysInWeek + daysInMonth + (dayOfWeek - 1)); //If there is a week 
+  let month = [];
+  let weekOfCalendar = [];
+  let dataDay = {};
+  
+  for (let day = 1; day <= amountDayInMonth; day++) {
+    if (day <= dayOfWeek - 1) {
+      dataDay.dayOfMonth = daysInMonth - (dayOfWeek - 1) + day;
+      dataDay.notCurrentMonth = true;
+      dataDay.currentDay = false;
+      if (daysUser.checkInDateInMonth) {
+        dataDay.selectedDay = false;
+      } else {
+        daysUser.checkInDate <= dataDay.dayOfMonth ? dataDay.selectedDay = true : dataDay.selectedDay = false;
+      }
+      weekOfCalendar.push(dataDay);
+      dataDay = {};
+
+    } else if (day <= daysInMonth + (dayOfWeek - 1)) {
+      dataDay.dayOfMonth = day - (dayOfWeek - 1);
+      dataDay.notCurrentMonth = false;
+      if (!daysUser.checkInDateInMonth && !daysUser.checkOutDateInMonth) {
+        dataDay.selectedDay = true;
+      } else if (daysUser.checkOutDateInMonth) {
+        dataDay.dayOfMonth <= daysUser.checkOutDate ? dataDay.selectedDay = true : dataDay.selectedDay = false;
+      } else {
+        dataDay.dayOfMonth >= daysUser.checkInDate ? dataDay.selectedDay = true : dataDay.selectedDay = false;
+      }
+      (new Date()).getDate() === dataDay.dayOfMonth ? dataDay.currentDay = true : dataDay.currentDay = false;
+      weekOfCalendar.push(dataDay);
+      dataDay = {};
+
+    } else {
+      dataDay.dayOfMonth = day - (dayOfWeek - 1) - daysInMonth;
+      dataDay.notCurrentMonth = true;
+      dataDay.currentDay = false;
+      if (daysUser.checkOutDateInMonth) {
+        dataDay.selectedDay = false;
+      } else {
+        dataDay.dayOfMonth <= daysUser.checkOutDate ? dataDay.selectedDay = true : dataDay.selectedDay = false;
+      }
+      weekOfCalendar.push(dataDay);
+      dataDay = {};
+    }
+
+    if (weekOfCalendar.length === daysInWeek) {
+      month.push(weekOfCalendar);
+      weekOfCalendar = [];
+    }
+  }
+  return month;
+}
+
+const newWeek = (week, dataMonth, anyMonth) => {
+  const newWeekElement = document.createElement('div');
+  for (let i = 0; i < 7; i++){
+    const newDayElement = document.createElement('p');
+    if (dataMonth[week][i].notCurrentMonth){
+      newDayElement.innerHTML = '';
+      newDayElement.setAttribute('class', 'header__countday__of__week__none__js');
+    } else {
+      newDayElement.innerHTML = `${dataMonth[week][i].dayOfMonth}`;
+      newDayElement.setAttribute('class', 'header__countday__of__week__js');
+      if (dataMonth[week][i].dayOfMonth < (new Date()).getDate() && anyMonth === 0)  newDayElement.style.color = 'var(--secondary-text)';
+      if (dataMonth[week][i].currentDay && anyMonth === 0) newDayElement.style.color = 'var(--primary)';
+    }
+    
+    newWeekElement.appendChild(newDayElement);
+  }
+  newWeekElement.setAttribute('class', 'header__count__day__of__week__js');
+  return newWeekElement;
+}
+
+const fillingOfTheMonth = (countFirst, countSecond) => {
+  const newElement = () => {
+    const newMonthElement = document.createElement('div');
+    newMonthElement.setAttribute('class', `header__number__of__days__js`);
+    return newMonthElement;
+  }
+  
+  let dataFirstMonth = getCalendarMonth(howMatchdaysInMonth(countFirst), 7, whatStartDayWeek(countFirst), dateUser);
+  document.querySelector('.header__first-month__js').appendChild(newElement());
+  for (let q = 0; q < dataFirstMonth.length; q++)
+  document.querySelector('.header__number__of__days__js').appendChild(newWeek(q, dataFirstMonth, countFirst));
+
+  let dataSecondMonth = getCalendarMonth(howMatchdaysInMonth(countSecond), 7, whatStartDayWeek(countSecond), dateUser);
+  document.querySelector('.header__second-month__js').appendChild(newElement());
+  for (let q = 0; q < dataSecondMonth.length; q++)
+  document.querySelector('.header__second-month__js .header__number__of__days__js').appendChild(newWeek(q, dataSecondMonth, countSecond));
+}
+
+fillingOfTheMonth(countFirstMonth, countSecondMonth);
 
 const letMonth = (count) => {
   let newMonth = new Date();
@@ -121,8 +260,127 @@ const choseMonth = (count) => {
 }  
 
 document.querySelector('.header__first-month__js div:first-of-type').appendChild(choseMonth(0));
+document.querySelector('.header__second-month__js div:first-of-type').appendChild(choseMonth(countSecondMonth));
 
-document.querySelector('.header__second-month__js div:first-of-type').appendChild(choseMonth(countMonth));
+
+nextMonthRight.addEventListener('click', (event) => {
+  countSecondMonth++;
+  document.querySelector('.header__first-month__js .header__number__of__days__js').remove();
+  document.querySelector('.header__second-month__js .header__number__of__days__js').remove();
+  document.querySelector('.header__second-month__js .header__month__year__js').remove();
+  document.querySelector('.header__second-month__js div:first-of-type').appendChild(choseMonth(countSecondMonth));
+  document.querySelector('.header__calendar-left__js').style.display = 'inline';
+  fillingOfTheMonth(countFirstMonth, countSecondMonth);
+  event.stopPropagation();
+});
+previousMonthLeft.addEventListener('click', (event) => {
+  countSecondMonth--;
+  document.querySelector('.header__first-month__js .header__number__of__days__js').remove();
+  document.querySelector('.header__second-month__js .header__number__of__days__js').remove();
+  document.querySelector('.header__second-month__js .header__month__year__js').remove();
+  document.querySelector('.header__second-month__js div:first-of-type').appendChild(choseMonth(countSecondMonth));
+  if ( countSecondMonth === 1) document.querySelector('.header__calendar-left__js').style.display = 'none';
+  fillingOfTheMonth(countFirstMonth, countSecondMonth);
+  event.stopPropagation();
+});
+
+const changeLabeIn = (numberDay, numberMonth) => {
+  labelIn = (`${numberDay}.${letMonth(numberMonth).toLocaleDateString('en-us', { month: 'numeric'})}.${letMonth(numberMonth).toLocaleDateString('en-us', { year: 'numeric' })}`);
+}
+
+const changeLabeOut = (numberDay, numberMonth) => {
+  labelOut = (`${numberDay}.${letMonth(numberMonth).toLocaleDateString('en-us', { month: 'numeric'})}.${letMonth(numberMonth).toLocaleDateString('en-us', { year: 'numeric' })}`);
+}
+
+currentMonth.addEventListener('click', (event) => {
+  if (chooseDateCurrent!== 0 && chooseDateCurrentEnd !== 63) {
+    document.querySelectorAll('.header__countday__of__week__js').forEach((n) => n.setAttribute('class','header__countday__of__week__js'));
+    chooseDateCurrent = 0;
+    chooseDateCurrentEnd = 63;
+    event.target.classList.toggle('background__color__date__js');
+    chooseDateCurrent = event.target.innerHTML;
+    labelOut = 'Check-out';
+    changeLabeIn(chooseDateCurrent, countFirstMonth);
+  } else if (event.target.innerHTML !== chooseDateCurrent && event.target.innerHTML >= (new Date()).getDate() && chooseDateCurrent > Number(event.target.innerHTML)){
+    document.querySelectorAll('.header__countday__of__week__js').forEach((n) => n.setAttribute('class','header__countday__of__week__js'));
+    event.target.classList.toggle('background__color__date__js');
+    chooseDateCurrent = event.target.innerHTML;
+    changeLabeIn(chooseDateCurrent, countFirstMonth);
+  } else if (event.target.innerHTML >= (new Date()).getDate() && Number(event.target.innerHTML) > chooseDateCurrent && chooseDateCurrent !== 0 && Number(event.target.innerHTML) < chooseDateCurrentEnd) {
+    event.target.classList.toggle('background__color__date__js');
+    chooseDateCurrentEnd = event.target.innerHTML;
+    document.querySelectorAll('.header__first-month__js .header__countday__of__week__js').forEach((n) => {
+      if (Number(n.innerHTML) > chooseDateCurrent && Number(n.innerHTML) < chooseDateCurrentEnd) {
+        n.setAttribute('class','header__countday__of__week__js background__color__intermediate__dates__js');
+      };
+    });
+    changeLabeOut(chooseDateCurrentEnd, countFirstMonth);
+    changePlaseholderDate();
+    checkInCheckOutOff();
+    
+  } else if (event.target.innerHTML >= (new Date()).getDate()) {
+    
+    event.target.classList.toggle('background__color__date__js');
+    chooseDateCurrent = event.target.innerHTML;
+    changeLabeIn(chooseDateCurrent, countFirstMonth);
+  }
+  if (document.querySelector('.background__color__date__js') === null) {
+    labelIn = 'Check-in';
+    labelOut = 'Check-out';
+  }
+  changePlaseholderDate();
+  event.stopPropagation();
+});
+
+currentMonthNext.addEventListener('click', (event) => {
+
+  if (chooseDateCurrent!== 0 && chooseDateCurrentEnd !== 63) {
+    document.querySelectorAll('.header__countday__of__week__js').forEach((n) => n.setAttribute('class','header__countday__of__week__js'));
+    chooseDateCurrent = 0;
+    chooseDateCurrentEnd = 63;
+    event.target.classList.toggle('background__color__date__js');
+    chooseDateCurrent = howMatchdaysInMonth(0) + Number(event.target.innerHTML);
+    labelOut = 'Check-out';
+    changeLabeIn(Number(event.target.innerHTML), countSecondMonth);
+  } else if (howMatchdaysInMonth(0) + Number(event.target.innerHTML) !== chooseDateCurrent && chooseDateCurrent > howMatchdaysInMonth(0) + Number(event.target.innerHTML)) {
+    document.querySelectorAll('.header__countday__of__week__js').forEach((n) => n.setAttribute('class','header__countday__of__week__js'));
+    event.target.classList.toggle('background__color__date__js');
+    chooseDateCurrent = howMatchdaysInMonth(0) + Number(event.target.innerHTML);
+    changeLabeIn(Number(event.target.innerHTML), countSecondMonth);
+  } else if ( Number(event.target.innerHTML) + howMatchdaysInMonth(0) > chooseDateCurrent && chooseDateCurrent !== 0 && Number(event.target.innerHTML) + howMatchdaysInMonth(0) < chooseDateCurrentEnd ) {
+    event.target.classList.toggle('background__color__date__js');
+    chooseDateCurrentEnd = howMatchdaysInMonth(0) + Number(event.target.innerHTML);
+    document.querySelectorAll('.header__first-month__js .header__countday__of__week__js').forEach((n) => {
+      if (chooseDateCurrent < howMatchdaysInMonth(0) && Number(n.innerHTML) > chooseDateCurrent) {
+        n.setAttribute('class','header__countday__of__week__js background__color__intermediate__dates__js');
+      };
+    });
+    document.querySelectorAll('.header__second-month__js .header__countday__of__week__js').forEach((n) => {
+      if (howMatchdaysInMonth(0) + Number(n.innerHTML) > chooseDateCurrent && howMatchdaysInMonth(0) + Number(n.innerHTML) < chooseDateCurrentEnd) {
+        n.setAttribute('class','header__countday__of__week__js background__color__intermediate__dates__js');
+      };
+    });
+    changeLabeOut(Number(event.target.innerHTML), countSecondMonth);  
+    changePlaseholderDate();
+    checkInCheckOutOff();   
+  } else if (Number(event.target.innerHTML) !== 0 && (/\d/g).test(event.target.innerHTML) && (event.target.innerHTML).length <= 2) {
+    event.target.classList.toggle('background__color__date__js');
+    chooseDateCurrent = howMatchdaysInMonth(0) + Number(event.target.innerHTML);
+    changeLabeIn(Number(event.target.innerHTML), countSecondMonth);
+  }
+  if (document.querySelector('.background__color__date__js') === null) {
+    labelIn = 'Check-in';
+    labelOut = 'Check-out';
+  }
+  changePlaseholderDate();
+  event.stopPropagation();
+});
+
+checkInCheckOut.addEventListener('click', checkInCheckOutOn);
+checkInCheckOut.addEventListener('click', choosePeopleOf);
+body.addEventListener('click', checkInCheckOutOff);
+
+
 
 
 // Homes guests loves

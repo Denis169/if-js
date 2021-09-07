@@ -156,13 +156,14 @@ h1 {
 }
 
 .header__calendar__block {
+  display: none;
   position: absolute;
   width: 580px;
-  height: 272px;
+  height: 292px;
   background-color: var(--white);
   top: 75px;
   border-radius: 8px;
-  display: flex;
+  
 }
 
 .header__first-month, .header__second-month {
@@ -204,37 +205,43 @@ h1 {
   right: 30px;
 }
 
-.header__calendar-left {
+.header__calendar-left__js {
   transform: rotate(90deg);
   left: 30px;
+  display: none;
 }
 
-.header__name__day__of__week div {
+.header__name__day__of__week div,
+.header__countday__of__week__js,
+.header__countday__of__week__none__js {
   width: 35px;
   height: 35px;
-  display: flex;
-  justify-content: center;
   align-items: center;
 }
 
-.header__day__of__week {
+.header__day__of__week, .header__countday__of__week__js {
   font-weight: 300;
   font-size: 14px;
-  line-height: 16px;
+  line-height: 35px;
   text-align: center;
   color: var(--gray300);
+  cursor: pointer;
 }
 
+.header__number__of__days__js,
+.header__number__two__of__days__js {
+  flex-direction:column;
+}
 
+.background__color__date__js,
+.background__color__date__end__js {
+  background-color: var(--primary);
+  color: var(--white);
+}
 
-
-
-
-
-
-
-
-
+.background__color__intermediate__dates__js {
+  background-color: var(--secondary-text);
+}
 
 .header__input-adults-block {
   flex-basis: 26%;
