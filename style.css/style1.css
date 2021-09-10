@@ -155,7 +155,7 @@ h1 {
   position: relative;
 }
 
-.header__calendar__block {
+.header__calendar-block {
   display: none;
   position: absolute;
   width: 580px;
@@ -178,7 +178,7 @@ h1 {
   justify-content: center;
 }
 
-.header__name__of__month {
+.header__name-of-month {
   margin: 12px 0 11px 0;
 }
 
@@ -205,13 +205,13 @@ h1 {
   right: 30px;
 }
 
-.header__calendar-left__js {
+.calendar-left__js {
   transform: rotate(90deg);
   left: 30px;
   display: none;
 }
 
-.header__name__day__of__week div,
+.header__name-day-of-week div,
 .header__countday__of__week__js,
 .header__countday__of__week__none__js {
   width: 35px;
@@ -219,7 +219,7 @@ h1 {
   align-items: center;
 }
 
-.header__day__of__week, .header__countday__of__week__js {
+.header__day-of-week, .header__countday__of__week__js {
   font-weight: 300;
   font-size: 14px;
   line-height: 35px;
@@ -248,7 +248,7 @@ h1 {
   position: relative;
 }
 
-.header__filter__people {
+.header__filter-people {
   display: none;
   position: absolute;
   width: 82%;
@@ -685,9 +685,11 @@ h1 {
 
 .homes__section {
   padding: 105px 0 120px 0;
-  display: flex;
+  display: inline-flex;
   justify-content:center;
   position: relative;
+  left: 50%;
+  transform: translate(-50%);
 }
 
 .homes__section-col {
@@ -698,6 +700,7 @@ h1 {
 
 .homes__images {
   width: 100%;
+  height: 296px;
 }
 
 .homes__svg_arrow-right, .homes__svg_arrow-left {
@@ -732,7 +735,7 @@ h1 {
 
 
 .homes__col__js {
-  width: 100%;
+  width: 296px;
   margin-left: 8px;
   margin-right: 8px;
   display: flex;
@@ -795,13 +798,20 @@ h1 {
   .homes__svg_arrow-right img, .homes__svg_arrow-left img {
     width: 13px;
   }
+  .homes__images {
+    width: 100%;
+    height: 155px;
+  }
+  .homes__col__js{
+    width: 156px;
+  }
 }
 
 @media only screen and (max-width: 768px){
   .homes__col__js:last-of-type {
     display: none;
   }
-  .homes__section .homes__col:nth-of-type(3){
+  .homes__section .homes__col__js:nth-of-type(3){
     margin-right: 0;
   }
   .homes__link {
@@ -814,12 +824,15 @@ h1 {
   }
 }
 
-@media only screen and (max-width: 480px){
+@media only screen and (max-width: 540px){
   .homes__col__js:nth-of-type(3) {
     display: none;
   }
-  .homes__section .homes__col:nth-of-type(2){
+  .homes__section .homes__col__js:nth-of-type(2){
     margin-right: 0;
+  }
+  .homes__col__js{
+    width: 100%;
   }
 
 }

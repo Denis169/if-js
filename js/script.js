@@ -1,5 +1,5 @@
 // Header forma people
-const adultsChildrenRooms = document.querySelector('.header__input-adults-block__js');
+const adultsChildrenRooms = document.querySelector('.adults-block__js');
 const body = document.querySelector('body');
 const minusAdults = document.querySelector('.header__minus__adults__js');
 const plusAdults = document.querySelector('.header__plus__adults__js');
@@ -21,12 +21,12 @@ const addSelectChildren = () =>{
 }
 
 const choosePeopleOn = (event) => {
-  document.querySelector('.header__filter__people__js').style.display = 'inline';
+  document.querySelector('.filter-people__js').style.display = 'inline';
   event.stopPropagation();
 }
 
 const choosePeopleOf = (event) => {
-  document.querySelector('.header__filter__people__js').style.display = 'none';
+  document.querySelector('.filter-people__js').style.display = 'none';
   event.stopPropagation();
 }
 
@@ -103,10 +103,10 @@ minusRoom.addEventListener('click', smoller);
 
 // Header calendar
 
-const nextMonthRight = document.querySelector('.header__calendar-right__js');
-const previousMonthLeft = document.querySelector('.header__calendar-left__js');
-const currentMonth = document.querySelector('.header__first-month__js');
-const currentMonthNext = document.querySelector('.header__second-month__js');
+const nextMonthRight = document.querySelector('.calendar-right__js');
+const previousMonthLeft = document.querySelector('.calendar-left__js');
+const currentMonth = document.querySelector('.first-month__js');
+const currentMonthNext = document.querySelector('.second-month__js');
 const checkInCheckOut = document.querySelector('#date');
 
 const dateUser = {
@@ -124,12 +124,12 @@ let labelIn = 'Check-in';
 let labelOut = 'Check-out';
 
 const checkInCheckOutOn = (event) => {
-  document.querySelector('.header__calendar__block__js').style.display = 'flex';
+  document.querySelector('.calendar-block__js').style.display = 'flex';
   event.stopPropagation();
 }
 
 function checkInCheckOutOff(event) {
-  document.querySelector('.header__calendar__block__js').style.display = 'none';
+  document.querySelector('.calendar-block__js').style.display = 'none';
 }
 
 const changePlaseholderDate = () => document.querySelector('#date').setAttribute('placeholder', `${labelIn} - ${labelOut}`);
@@ -235,14 +235,14 @@ const fillingOfTheMonth = (countFirst, countSecond) => {
   }
   
   let dataFirstMonth = getCalendarMonth(howMatchdaysInMonth(countFirst), 7, whatStartDayWeek(countFirst), dateUser);
-  document.querySelector('.header__first-month__js').appendChild(newElement());
+  document.querySelector('.first-month__js').appendChild(newElement());
   for (let q = 0; q < dataFirstMonth.length; q++)
   document.querySelector('.header__number__of__days__js').appendChild(newWeek(q, dataFirstMonth, countFirst));
 
   let dataSecondMonth = getCalendarMonth(howMatchdaysInMonth(countSecond), 7, whatStartDayWeek(countSecond), dateUser);
-  document.querySelector('.header__second-month__js').appendChild(newElement());
+  document.querySelector('.second-month__js').appendChild(newElement());
   for (let q = 0; q < dataSecondMonth.length; q++)
-  document.querySelector('.header__second-month__js .header__number__of__days__js').appendChild(newWeek(q, dataSecondMonth, countSecond));
+  document.querySelector('.second-month__js .header__number__of__days__js').appendChild(newWeek(q, dataSecondMonth, countSecond));
 }
 
 fillingOfTheMonth(countFirstMonth, countSecondMonth);
@@ -259,27 +259,27 @@ const choseMonth = (count) => {
   return nameMonth;
 }  
 
-document.querySelector('.header__first-month__js div:first-of-type').appendChild(choseMonth(0));
-document.querySelector('.header__second-month__js div:first-of-type').appendChild(choseMonth(countSecondMonth));
+document.querySelector('.first-month__js div:first-of-type').appendChild(choseMonth(0));
+document.querySelector('.second-month__js div:first-of-type').appendChild(choseMonth(countSecondMonth));
 
 
 nextMonthRight.addEventListener('click', (event) => {
   countSecondMonth++;
-  document.querySelector('.header__first-month__js .header__number__of__days__js').remove();
-  document.querySelector('.header__second-month__js .header__number__of__days__js').remove();
-  document.querySelector('.header__second-month__js .header__month__year__js').remove();
-  document.querySelector('.header__second-month__js div:first-of-type').appendChild(choseMonth(countSecondMonth));
-  document.querySelector('.header__calendar-left__js').style.display = 'inline';
+  document.querySelector('.first-month__js .header__number__of__days__js').remove();
+  document.querySelector('.second-month__js .header__number__of__days__js').remove();
+  document.querySelector('.second-month__js .header__month__year__js').remove();
+  document.querySelector('.second-month__js div:first-of-type').appendChild(choseMonth(countSecondMonth));
+  document.querySelector('.calendar-left__js').style.display = 'inline';
   fillingOfTheMonth(countFirstMonth, countSecondMonth);
   event.stopPropagation();
 });
 previousMonthLeft.addEventListener('click', (event) => {
   countSecondMonth--;
-  document.querySelector('.header__first-month__js .header__number__of__days__js').remove();
-  document.querySelector('.header__second-month__js .header__number__of__days__js').remove();
-  document.querySelector('.header__second-month__js .header__month__year__js').remove();
-  document.querySelector('.header__second-month__js div:first-of-type').appendChild(choseMonth(countSecondMonth));
-  if ( countSecondMonth === 1) document.querySelector('.header__calendar-left__js').style.display = 'none';
+  document.querySelector('.first-month__js .header__number__of__days__js').remove();
+  document.querySelector('.second-month__js .header__number__of__days__js').remove();
+  document.querySelector('.second-month__js .header__month__year__js').remove();
+  document.querySelector('.second-month__js div:first-of-type').appendChild(choseMonth(countSecondMonth));
+  if ( countSecondMonth === 1) document.querySelector('.calendar-left__js').style.display = 'none';
   fillingOfTheMonth(countFirstMonth, countSecondMonth);
   event.stopPropagation();
 });
@@ -309,7 +309,7 @@ currentMonth.addEventListener('click', (event) => {
   } else if (event.target.innerHTML >= (new Date()).getDate() && Number(event.target.innerHTML) > chooseDateCurrent && chooseDateCurrent !== 0 && Number(event.target.innerHTML) < chooseDateCurrentEnd) {
     event.target.classList.toggle('background__color__date__js');
     chooseDateCurrentEnd = event.target.innerHTML;
-    document.querySelectorAll('.header__first-month__js .header__countday__of__week__js').forEach((n) => {
+    document.querySelectorAll('.first-month__js .header__countday__of__week__js').forEach((n) => {
       if (Number(n.innerHTML) > chooseDateCurrent && Number(n.innerHTML) < chooseDateCurrentEnd) {
         n.setAttribute('class','header__countday__of__week__js background__color__intermediate__dates__js');
       };
@@ -350,12 +350,12 @@ currentMonthNext.addEventListener('click', (event) => {
   } else if ( Number(event.target.innerHTML) + howMatchdaysInMonth(0) > chooseDateCurrent && chooseDateCurrent !== 0 && Number(event.target.innerHTML) + howMatchdaysInMonth(0) < chooseDateCurrentEnd ) {
     event.target.classList.toggle('background__color__date__js');
     chooseDateCurrentEnd = howMatchdaysInMonth(0) + Number(event.target.innerHTML);
-    document.querySelectorAll('.header__first-month__js .header__countday__of__week__js').forEach((n) => {
+    document.querySelectorAll('.first-month__js .header__countday__of__week__js').forEach((n) => {
       if (chooseDateCurrent < howMatchdaysInMonth(0) && Number(n.innerHTML) > chooseDateCurrent) {
         n.setAttribute('class','header__countday__of__week__js background__color__intermediate__dates__js');
       };
     });
-    document.querySelectorAll('.header__second-month__js .header__countday__of__week__js').forEach((n) => {
+    document.querySelectorAll('.second-month__js .header__countday__of__week__js').forEach((n) => {
       if (howMatchdaysInMonth(0) + Number(n.innerHTML) > chooseDateCurrent && howMatchdaysInMonth(0) + Number(n.innerHTML) < chooseDateCurrentEnd) {
         n.setAttribute('class','header__countday__of__week__js background__color__intermediate__dates__js');
       };
@@ -385,99 +385,59 @@ body.addEventListener('click', checkInCheckOutOff);
 
 // Homes guests loves
 
-const data = [
-  {
-    name: 'Hotel Leopold',
-    city: 'Saint Petersburg',
-    country: 'Russia',
-    imageUrl: 'https://res.cloudinary.com/intellectfox/image/upload/v1610379365/fe/hotel-leopold_mflelk.jpg',
-  },
-  {
-    name: 'Apartment Sunshine',
-    city: 'Santa  Cruz de Tenerife',
-    country: 'Spain',
-    imageUrl: 'https://res.cloudinary.com/intellectfox/image/upload/v1610379364/fe/apartment-sunshine_vhdlel.jpg',
-  },
-  {
-    name: 'Villa Kunerad',
-    city: 'Vysokie Tatry',
-    country: 'Slowakia',
-    imageUrl: 'https://res.cloudinary.com/intellectfox/image/upload/v1610379365/fe/villa-kunerad_gdbqgv.jpg',
-  },
-  {
-    name: 'Hostel Friendship',
-    city: 'Berlin',
-    country: 'Germany',
-    imageUrl: 'https://res.cloudinary.com/intellectfox/image/upload/v1610379364/fe/hostel-friendship_aw6tn7.jpg',
-  },
-  {
-    name: 'Radisson Blu Hotel',
-    city: 'Kyiv',
-    country: 'Ukraine',
-    imageUrl: 'https://res.cloudinary.com/intellectfox/image/upload/v1610379365/fe/radisson-blu-hotel_jwtowg.jpg',
-  },
-  {
-    name: 'Paradise Hotel',
-    city: 'Guadalupe',
-    country: 'Mexico',
-    imageUrl: 'https://res.cloudinary.com/intellectfox/image/upload/v1610379365/fe/paradise-hotel_i6whae.jpg',
-  },
-  {
-    name: 'Hotel Grindewald',
-    city: 'Interlaken',
-    country: 'Switzerland',
-    imageUrl: 'https://res.cloudinary.com/intellectfox/image/upload/v1610379365/fe/hotel-grindewald_zsjsmy.jpg',
-  },
-  {
-    name: 'The Andaman Resort',
-    city: 'Port Dickson',
-    country: 'Malaysia',
-    imageUrl: 'https://res.cloudinary.com/intellectfox/image/upload/v1610379365/fe/the-andaman-resort_d2xksj.jpg',
-  },
-];
+(async function placesData() {
+  try {
+    if (sessionStorage.getItem('places') === null){
+    let places = await (await fetch('https://fe-student-api.herokuapp.com/api/hotels/popular')).json();
+    console.log(places);
+    sessionStorage.setItem('places', JSON.stringify(places));
+    }
 
-let count = 0;
-let countLeft = data.length - 1;
+    const data = JSON.parse(sessionStorage.getItem('places'));
+    
+    let count = 0;
+    let countLeft = data.length - 1;
+    
+    const sliderRight = document.querySelector('.homes__svg_arrow-right__js');
+    const sliderLeft = document.querySelector('.homes__svg_arrow-left__js');
 
-const sliderRight = document.querySelector('.homes__svg_arrow-right__js');
-const sliderLeft = document.querySelector('.homes__svg_arrow-left__js');
+    const addNewElement = (counter) => {
+      const newDiv =  document.createElement('div');
+      newDiv.setAttribute('class', 'homes__col__js');
+      newDiv.innerHTML = `
+        <img class="homes__images" src="${data[counter].imageUrl}" alt="Hotel">
+        <a class="homes__link" href="">${data[counter].name}</a>
+        <p class="homes__text">${data[counter].city}, ${data[counter].country}</p>
+      `;
+      return newDiv;
+    }
 
-const addNewElement = (counter) => {
-  const newDiv =  document.createElement('div');
-  newDiv.setAttribute('class', 'homes__col__js');
-  newDiv.innerHTML = `
-    <img class="homes__images" src="${data[counter].imageUrl}" alt="Hotel">
-    <a class="homes__link" href="">${data[counter].name}</a>
-    <p class="homes__text">${data[counter].city}, ${data[counter].country}</p>
-  `;
-  return newDiv;
-}
+    const blockFilling = () => {
+      for (let i = 0; i <= 3; i++) {
+        document.querySelector('.homes__section-col__js').append(addNewElement(i));
+        count = i + 1;
+      }
+    }
 
-const blockFilling = () => {
-  for (let i = 0; i <= 3; i++) {
-    document.querySelector('.homes__section-col__js').append(addNewElement(i));
-    count = i + 1;
+    const changeColRight = () => {
+      document.querySelector('.homes__section-col__js').removeChild(document.querySelector('.homes__section-col__js').firstElementChild);
+      document.querySelector('.homes__section-col__js').append(addNewElement(count));
+      count === data.length - 1 ? count = 0 : count++;
+      countLeft === data.length - 1 ? countLeft = 0 : countLeft++;
+    }
+    const changeColLeft = () => {
+      document.querySelector('.homes__section-col__js').removeChild(document.querySelector('.homes__section-col__js').lastElementChild);
+      document.querySelector('.homes__section-col__js').prepend(addNewElement(countLeft));
+      countLeft === 0 ? countLeft = data.length - 1 : countLeft--;
+      count === 0 ? count = data.length - 1 : count--;
+    }
+
+    blockFilling();
+    sliderRight.addEventListener('click', changeColRight);
+    sliderLeft.addEventListener('click', changeColLeft);
+
+  } catch (error) {
+    console.error(error);
   }
-}
-
-
-const changeColRight = () => {
-  document.querySelector('.homes__section-col__js').removeChild(document.querySelector('.homes__section-col__js').firstElementChild);
-  document.querySelector('.homes__section-col__js').append(addNewElement(count));
-  count === data.length - 1 ? count = 0 : count++;
-  countLeft === data.length - 1 ? countLeft = 0 : countLeft++;
-}
-
-
-const changeColLeft = () => {
-  document.querySelector('.homes__section-col__js').removeChild(document.querySelector('.homes__section-col__js').lastElementChild);
-  document.querySelector('.homes__section-col__js').prepend(addNewElement(countLeft));
-  countLeft === 0 ? countLeft = data.length - 1 : countLeft--;
-  count === 0 ? count = data.length - 1 : count--;
-}
-
-blockFilling();
-sliderRight.addEventListener('click', changeColRight);
-sliderLeft.addEventListener('click', changeColLeft);
-
+})();
 
