@@ -156,7 +156,7 @@ h1 {
 }
 
 .header__calendar-block {
-  display: none;
+  display: flex;
   position: absolute;
   width: 580px;
   height: 292px;
@@ -182,7 +182,7 @@ h1 {
   margin: 12px 0 11px 0;
 }
 
-.header__month__year__js {
+.header__month-year {
   font-style: normal;
   font-weight: 500;
   font-size: 18px;
@@ -205,21 +205,20 @@ h1 {
   right: 30px;
 }
 
-.calendar-left__js {
+.header__calendar-left {
   transform: rotate(90deg);
   left: 30px;
-  display: none;
 }
 
 .header__name-day-of-week div,
-.header__countday__of__week__js,
-.header__countday__of__week__none__js {
+.header__countday-of-week,
+.header__countday-of-week-none {
   width: 35px;
   height: 35px;
   align-items: center;
 }
 
-.header__day-of-week, .header__countday__of__week__js {
+.header__day-of-week, .header__countday-of-week {
   font-weight: 300;
   font-size: 14px;
   line-height: 35px;
@@ -228,18 +227,18 @@ h1 {
   cursor: pointer;
 }
 
-.header__number__of__days__js,
+.header__number-of-days,
 .header__number__two__of__days__js {
   flex-direction:column;
 }
 
-.background__color__date__js,
+.background-color__date,
 .background__color__date__end__js {
   background-color: var(--primary);
   color: var(--white);
 }
 
-.background__color__intermediate__dates__js {
+.background-color__intermediate-dates {
   background-color: var(--secondary-text);
 }
 
@@ -249,7 +248,6 @@ h1 {
 }
 
 .header__filter-people {
-  display: none;
   position: absolute;
   width: 82%;
   top: 75px;
@@ -298,25 +296,31 @@ h1 {
   cursor: pointer;
 }
 
-#no__activity__js {
+#minus-adults.header__no-activity,
+#plus-adults.header__no-activity,
+#minus-children.header__no-activity,
+#plus-children.header__no-activity,
+#minus-room.header__no-activity,
+#plus-room.header__no-activity{
   border: 1px solid var(--secondary-text);
   color: var(--secondary-text);
 }
 
-.header__filter__childrens__age__js {
+.header__display-none,
+.header__filter-people .header__display-none {
   display: none;
 }
 
-.header__filter__childrens__age {
+.header__filter-childrens-age {
   margin: 28px 22px 22px 19px;
 }
 
-.header__filter__childrens__age p {
+.header__filter-childrens-age p {
   font-size: 12px;
   line-height: 14px;
 }
 
-.header__filter__childrens__age select {
+.header__filter-childrens-age select {
   border: 1px solid var(--primary);
   font-size: 12px;
   line-height: 14px;
@@ -341,10 +345,15 @@ h1 {
 
 .input-place,.input-date,.input-adults {
   font-size: 18px;
-  line-height: 21px;
+  line-height: 64px;
+  color: var(--primary-text);
 }
 
-.input-place:focus,.input-date:focus,.input-adults:focus {
+.header__input-border {
+  border: 3px solid var(--secondary);
+}
+
+.input-place:focus,.input-date:focus {
   border: 3px solid var(--secondary);
 }
 
@@ -734,7 +743,7 @@ h1 {
 }
 
 
-.homes__col__js {
+.homes__col {
   width: 296px;
   margin-left: 8px;
   margin-right: 8px;
@@ -744,11 +753,11 @@ h1 {
   position: relative;
 }
 
-.homes__section .homes__col__js:first-of-type{
+.homes__section .homes__col:first-of-type{
   margin-left: 0;
 }
 
-.homes__section .homes__col__js:last-of-type{
+.homes__section .homes__col:last-of-type{
   margin-right: 0;
 }
 
@@ -802,16 +811,16 @@ h1 {
     width: 100%;
     height: 155px;
   }
-  .homes__col__js{
+  .homes__col{
     width: 156px;
   }
 }
 
 @media only screen and (max-width: 768px){
-  .homes__col__js:last-of-type {
+  .homes__col:last-of-type {
     display: none;
   }
-  .homes__section .homes__col__js:nth-of-type(3){
+  .homes__section .homes__col:nth-of-type(3){
     margin-right: 0;
   }
   .homes__link {
@@ -825,13 +834,13 @@ h1 {
 }
 
 @media only screen and (max-width: 540px){
-  .homes__col__js:nth-of-type(3) {
+  .homes__col:nth-of-type(3) {
     display: none;
   }
-  .homes__section .homes__col__js:nth-of-type(2){
+  .homes__section .homes__col:nth-of-type(2){
     margin-right: 0;
   }
-  .homes__col__js{
+  .homes__col{
     width: 100%;
   }
 

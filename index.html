@@ -77,9 +77,9 @@
               <input class="header__input input-place " id="place" type="text" placeholder="New York" required>
             </div>
             <div class="header__input-date-block">
-              <input class="header__input input-date" id="date" type="text"  placeholder="Check-in — Check-out"/>
-                <div class="header__calendar-block calendar-block__js">
-                  <div class="header__first-month first-month__js">
+              <p class="header__input input-date" id="chose-date" type="text">Check-in — Check-out</p>
+                <div class="header__calendar-block header__display-none" id="calendar-block">
+                  <div class="header__first-month" id="first-month-calendar">
                     <div class="header__name-of-month"></div>
                     <div class='header__name-day-of-week'>
                       <div>
@@ -105,9 +105,9 @@
                       </div>
                     </div>
                   </div>
-                  <div class="header__second-month second-month__js">
-                    <img class='header__calendar-left calendar-left__js' src="./image/arrow-slider.svg" alt="right-left">
-                    <img class='header__calendar-right calendar-right__js' src="./image/arrow-slider.svg" alt="right-left">
+                  <div class="header__second-month" id="second-month-calendar">
+                    <img class="header__calendar-left header__display-none" id="second-month-calendar-left" src="./image/arrow-slider.svg" alt="right-left">
+                    <img class="header__calendar-right" id="second-month-calendar-right" src="./image/arrow-slider.svg" alt="right-left">
                     <div class="header__name-of-month"></div>
                     <div class='header__name-day-of-week'>
                       <div>
@@ -145,36 +145,36 @@
                 <input class="header__input-mobile-date" id="date-out" type="text" placeholder="Check-out date" required/>
               </div>
             </div>
-            <div class="header__input-adults-block adults-block__js">
-              <input class="header__input input-adults input__people__js" type='text' placeholder="2 Adults - 0 Children - 1 Room"/>
-              <div class="header__filter-people filter-people__js">
+            <div class="header__input-adults-block" id="peopleFilter">
+              <p class="header__input input-adults" id="Adults-Children-Room">2 Adults - 0 Children - 1 Room</p>
+              <div class="header__filter-people header__display-none" id="filter-people">
                 <div class="header__filter__counters">
                   <div class="header__filter__adults">
                     <p>Adults</p>
                     <div class="header__filter__counter">
-                      <p class="header__minus__adults__js">&ndash;</p>
+                      <p id="minus-adults">&ndash;</p>
                       <p class="header__adults__quantity__js">2</p>
-                      <p class="header__plus__adults__js">&plus;</p>
+                      <p id="plus-adults">&plus;</p>
                     </div>
                   </div>
                   <div class="header__filter__children">
                     <p>Children</p>
                     <div class="header__filter__counter">
-                      <p class="header__minus__children__js" id="no__activity__js">&ndash;</p>
+                      <p class="header__no-activity" id="minus-children">&ndash;</p>
                       <p>0</p>
-                      <p class="header__plus__children__js">&plus;</p>
+                      <p id="plus-children">&plus;</p>
                     </div>
                   </div>
                   <div class="header__filter__room">
                     <p>Room</p>
                     <div class="header__filter__counter">
-                      <p class="header__minus__room__js">&ndash;</p>
+                      <p id="minus-room">&ndash;</p>
                       <p>1</p>
-                      <p class="header__plus__room__js">&plus;</p>
+                      <p id="plus-room">&plus;</p>
                     </div>
                   </div>
                 </div>
-                <div  id='header__childs__age' class="header__filter__childrens__age header__filter__childrens__age__js">
+                <div  id='header__childs-age' class="header__filter-childrens-age header__display-none">
                   <p id="children">What is the age of the child you’re <br> travelling with?</p>      
                 </div>
               </div>
@@ -247,12 +247,12 @@
       <div class="container">
         <h2 class="homes__caption">Homes guests loves</h2>
         <div class="homes__section">
-          <div class="homes__section-col homes__section-col__js">
+          <div class="homes__section-col" id="homes__section-col">
           </div>
-          <div class="homes__svg_arrow-right homes__svg_arrow-right__js">
+          <div class="homes__svg_arrow-right" id="homes-arrow-right">
             <img src="./image/arrow-slider.svg" alt="slider">
           </div>
-          <div class="homes__svg_arrow-left homes__svg_arrow-left__js">
+          <div class="homes__svg_arrow-left" id="homes-arrow-left">
             <img src="./image/arrow-slider.svg" alt="slider">
           </div>
         </div>
