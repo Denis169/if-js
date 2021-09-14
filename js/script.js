@@ -18,7 +18,8 @@ const filterCounts = {
   children: {
     min: 0,
     max: 10,
-    current: 0
+    current: 0,
+    maximumAge: 17
   },
   rooms: {
     min: 0,
@@ -29,7 +30,7 @@ const filterCounts = {
 
 const addSelectChildren = () =>{
   const select = document.createElement('select');
-  for (let i = 0; i < 17; i++) {
+  for (let i = 0; i < filterCounts.children.maximumAge; i++) {
     select.insertAdjacentHTML('beforeend',`<option>${i + 1} years old</option>`);
   }
   return select;
@@ -38,6 +39,7 @@ const addSelectChildren = () =>{
 const choosePeopleOn = (event) => {
   formPeople.classList.remove('header__display-none');
   inscriptionPeople.classList.add('header__input-border');
+  checkInCheckOutOff();
   event.stopPropagation();
 }
 
@@ -139,8 +141,8 @@ let chooseDateCurrent = 0;
 let chooseDateCurrentEnd = 63;
 let labelIn = 'Check-in';
 let labelOut = 'Check-out';
-let todayDate = new Date();
-let arrayWeek = [7, 1, 2, 3, 4, 5, 6];
+const todayDate = new Date();
+const arrayWeek = [7, 1, 2, 3, 4, 5, 6];
 
 const checkInCheckOutOn = (event) => {
   calendarBlock.classList.remove('header__display-none');
