@@ -77,8 +77,63 @@
               <input class="header__input input-place " id="place" type="text" placeholder="New York" required>
             </div>
             <div class="header__input-date-block">
-              <label for="date" class="label">Check-in — Check-out</label>
-              <input class="header__input input-date" id="date" type="date" required/>
+              <p class="header__input input-date" id="chose-date" type="text">Check-in — Check-out</p>
+                <div class="header__calendar-block header__display-none" id="calendar-block">
+                  <div class="header__first-month" id="first-month-calendar">
+                    <div class="header__name-of-month"></div>
+                    <div class='header__name-day-of-week'>
+                      <div>
+                        <p class="header__day-of-week">Mo</p>
+                      </div>
+                      <div>
+                        <p class="header__day-of-week">Tu</p>
+                      </div>
+                      <div>
+                        <p class="header__day-of-week">We</p>
+                      </div>
+                      <div>
+                        <p class="header__day-of-week">Th</p>
+                      </div>
+                      <div>
+                        <p class="header__day-of-week">Fr</p>
+                      </div>
+                      <div>
+                        <p class="header__day-of-week">Sa</p>
+                      </div>
+                      <div>
+                        <p class="header__day-of-week">Su</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="header__second-month" id="second-month-calendar">
+                    <img class="header__calendar-left header__display-none" id="second-month-calendar-left" src="./image/arrow-slider.svg" alt="right-left">
+                    <img class="header__calendar-right" id="second-month-calendar-right" src="./image/arrow-slider.svg" alt="right-left">
+                    <div class="header__name-of-month"></div>
+                    <div class='header__name-day-of-week'>
+                      <div>
+                        <p class="header__day-of-week">Mo</p>
+                      </div>
+                      <div>
+                        <p class="header__day-of-week">Tu</p>
+                      </div>
+                      <div>
+                        <p class="header__day-of-week">We</p>
+                      </div>
+                      <div>
+                        <p class="header__day-of-week">Th</p>
+                      </div>
+                      <div>
+                        <p class="header__day-of-week">Fr</p>
+                      </div>
+                      <div>
+                        <p class="header__day-of-week">Sa</p>
+                      </div>
+                      <div>
+                        <p class="header__day-of-week">Su</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
             </div>
             <div class="header__mobile-input-date-block">
               <div class="header__mobile-date">
@@ -90,8 +145,39 @@
                 <input class="header__input-mobile-date" id="date-out" type="text" placeholder="Check-out date" required/>
               </div>
             </div>
-            <div class="header__input-adults-block">
-              <input class="header__input input-adults" type='text' placeholder="2 Adults - 0 Children - 1Room"/>
+            <div class="header__input-adults-block" id="peopleFilter">
+              <p class="header__input input-adults" id="Adults-Children-Room">2 Adults - 0 Children - 1 Room</p>
+              <div class="header__filter-people header__display-none" id="filter-people">
+                <div class="header__filter__counters">
+                  <div class="header__filter__adults">
+                    <p>Adults</p>
+                    <div class="header__filter__counter">
+                      <p id="minus-adults">&ndash;</p>
+                      <p class="header__adults__quantity__js">2</p>
+                      <p id="plus-adults">&plus;</p>
+                    </div>
+                  </div>
+                  <div class="header__filter__children">
+                    <p>Children</p>
+                    <div class="header__filter__counter">
+                      <p class="header__no-activity" id="minus-children">&ndash;</p>
+                      <p>0</p>
+                      <p id="plus-children">&plus;</p>
+                    </div>
+                  </div>
+                  <div class="header__filter__room">
+                    <p>Room</p>
+                    <div class="header__filter__counter">
+                      <p id="minus-room">&ndash;</p>
+                      <p>1</p>
+                      <p id="plus-room">&plus;</p>
+                    </div>
+                  </div>
+                </div>
+                <div  id='header__childs-age' class="header__filter-childrens-age header__display-none">
+                  <p id="children">What is the age of the child you’re <br> travelling with?</p>      
+                </div>
+              </div>
             </div>
             <div class="header__mobile-accommodation-block">
               <div class="header__mobile-adults">
@@ -112,8 +198,8 @@
             </div>
           </form>
           <div class="header__market">
-            <a href="#"><img class="google-apple-image" src="./image/google-play-badge.svg" alt="Googleplay"></a>
-            <a href="#"><img class="google-apple-image" src="./image/Download_on_the_App_Store_Badge_US-UK_RGB_blk_092917-1.svg" alt="App Store"></a>
+            <a href="https://play.google.com/store"><img class="google-apple-image" src="./image/google-play-badge.svg" alt="Googleplay"></a>
+            <a href="https://www.apple.com/store"><img class="google-apple-image" src="./image/Download_on_the_App_Store_Badge_US-UK_RGB_blk_092917-1.svg" alt="App Store"></a>
           </div>
         </div>
       </div>
@@ -161,12 +247,12 @@
       <div class="container">
         <h2 class="homes__caption">Homes guests loves</h2>
         <div class="homes__section">
-          <div class="homes__section-col homes__section-col__js">
+          <div class="homes__section-col" id="homes__section-col">
           </div>
-          <div class="homes__svg_arrow-right homes__svg_arrow-right__js">
+          <div class="homes__svg_arrow-right" id="homes-arrow-right">
             <img src="./image/arrow-slider.svg" alt="slider">
           </div>
-          <div class="homes__svg_arrow-left homes__svg_arrow-left__js">
+          <div class="homes__svg_arrow-left" id="homes-arrow-left">
             <img src="./image/arrow-slider.svg" alt="slider">
           </div>
         </div>
@@ -391,6 +477,7 @@
       </div>    
     </footer>
   </div>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   <script src="./js/script.js"></script>
 </body>
 </html>

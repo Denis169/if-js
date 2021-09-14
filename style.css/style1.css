@@ -42,7 +42,6 @@
 /*header*/
 
 header {
-  overflow: hidden;
   background-color: var(--primary-dark);
   background-image: url(../image/castelmezzano-1979546\ 1.png);
   background-size: cover;
@@ -123,7 +122,7 @@ header {
 
 .header__top-section {
   margin-top: 200px;
-  margin-bottom: 120px;
+  margin-bottom: 150px;
 }
 
 h1 {
@@ -156,9 +155,180 @@ h1 {
   position: relative;
 }
 
+.header__calendar-block {
+  display: flex;
+  position: absolute;
+  width: 580px;
+  height: 292px;
+  background-color: var(--white);
+  top: 75px;
+  border-radius: 8px;
+  
+}
+
+.header__first-month, .header__second-month {
+  border-radius: 8px;
+  width: 290px;
+  height: 272px;
+  margin: 0 22px 18px 22px;
+}
+
+.header__first-month div, .header__second-month div {
+  display: flex;
+  justify-content: center;
+}
+
+.header__name-of-month {
+  margin: 12px 0 11px 0;
+}
+
+.header__month-year {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 21px;
+}
+
+.header__second-month {
+  position: relative;
+}
+
+.header__calendar-right, .header__calendar-left {
+  position: absolute;
+  height: 6px;
+  top: 18px;
+  cursor: pointer;
+}
+
+.header__calendar-right {
+  transform: rotate(270deg);
+  right: 30px;
+}
+
+.header__calendar-left {
+  transform: rotate(90deg);
+  left: 30px;
+}
+
+.header__name-day-of-week div,
+.header__countday-of-week,
+.header__countday-of-week-none {
+  width: 35px;
+  height: 35px;
+  align-items: center;
+}
+
+.header__day-of-week, .header__countday-of-week {
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 35px;
+  text-align: center;
+  color: var(--gray300);
+  cursor: pointer;
+}
+
+.header__number-of-days,
+.header__number__two__of__days__js {
+  flex-direction:column;
+}
+
+.background-color__date,
+.background__color__date__end__js {
+  background-color: var(--primary);
+  color: var(--white);
+}
+
+.background-color__intermediate-dates {
+  background-color: var(--secondary-text);
+}
+
 .header__input-adults-block {
   flex-basis: 26%;
+  position: relative;
 }
+
+.header__filter-people {
+  position: absolute;
+  width: 82%;
+  top: 75px;
+  right: 0px;
+  border-radius: 8px;
+  background-color: var(--white);
+}
+
+.header__filter__counters {
+  height: 114px;
+  margin: 22px;
+  display: flex;
+  flex-direction:column;
+  justify-content: space-between;
+}
+
+.header__filter__adults,
+.header__filter__children,
+.header__filter__room {
+  display: flex;
+  justify-content: space-between;
+}
+
+.header__filter__adults p,
+.header__filter__children p,
+.header__filter__room p {
+  font-size: 16px;
+  line-height: 30px;
+  vertical-align: middle;
+}
+
+.header__filter__counter {
+ display: flex;
+ justify-content: space-between;
+ width: 108px;
+}
+
+.header__filter__counter p:first-of-type, .header__filter__counter p:last-of-type {
+  border: 1px solid var(--primary);
+  width: 30px;
+  height: 30px;
+  font-size: 20px;
+  line-height: 25px;
+  color: var(--primary);
+  text-align: center;
+  cursor: pointer;
+}
+
+#minus-adults.header__no-activity,
+#plus-adults.header__no-activity,
+#minus-children.header__no-activity,
+#plus-children.header__no-activity,
+#minus-room.header__no-activity,
+#plus-room.header__no-activity{
+  border: 1px solid var(--secondary-text);
+  color: var(--secondary-text);
+}
+
+.header__display-none,
+.header__filter-people .header__display-none {
+  display: none;
+}
+
+.header__filter-childrens-age {
+  margin: 28px 22px 22px 19px;
+}
+
+.header__filter-childrens-age p {
+  font-size: 12px;
+  line-height: 14px;
+}
+
+.header__filter-childrens-age select {
+  border: 1px solid var(--primary);
+  font-size: 12px;
+  line-height: 14px;
+  margin: 12px 4px 0 4px;
+  width: 99px;
+  height: 30px;
+}
+
 
 .header__input-button-block {
   flex-basis: 16%;
@@ -175,10 +345,15 @@ h1 {
 
 .input-place,.input-date,.input-adults {
   font-size: 18px;
-  line-height: 21px;
+  line-height: 64px;
+  color: var(--primary-text);
 }
 
-.input-place:focus,.input-date:focus,.input-adults:focus {
+.header__input-border {
+  border: 3px solid var(--secondary);
+}
+
+.input-place:focus,.input-date:focus {
   border: 3px solid var(--secondary);
 }
 
@@ -218,7 +393,7 @@ h1 {
   padding-right: 8px;
 }
 
-@media only screen and (max-width: 768px){
+@media only screen and (max-width: 1120px){
   .header__svg-logo {
     width: 121.92px;
     height: 24px;
@@ -519,9 +694,11 @@ h1 {
 
 .homes__section {
   padding: 105px 0 120px 0;
-  display: flex;
+  display: inline-flex;
   justify-content:center;
   position: relative;
+  left: 50%;
+  transform: translate(-50%);
 }
 
 .homes__section-col {
@@ -532,6 +709,7 @@ h1 {
 
 .homes__images {
   width: 100%;
+  height: 296px;
 }
 
 .homes__svg_arrow-right, .homes__svg_arrow-left {
@@ -565,8 +743,8 @@ h1 {
 }
 
 
-.homes__col__js {
-  width: 100%;
+.homes__col {
+  width: 296px;
   margin-left: 8px;
   margin-right: 8px;
   display: flex;
@@ -575,11 +753,11 @@ h1 {
   position: relative;
 }
 
-.homes__section .homes__col__js:first-of-type{
+.homes__section .homes__col:first-of-type{
   margin-left: 0;
 }
 
-.homes__section .homes__col__js:last-of-type{
+.homes__section .homes__col:last-of-type{
   margin-right: 0;
 }
 
@@ -629,10 +807,17 @@ h1 {
   .homes__svg_arrow-right img, .homes__svg_arrow-left img {
     width: 13px;
   }
+  .homes__images {
+    width: 100%;
+    height: 155px;
+  }
+  .homes__col{
+    width: 156px;
+  }
 }
 
 @media only screen and (max-width: 768px){
-  .homes__col__js:last-of-type {
+  .homes__col:last-of-type {
     display: none;
   }
   .homes__section .homes__col:nth-of-type(3){
@@ -648,12 +833,15 @@ h1 {
   }
 }
 
-@media only screen and (max-width: 480px){
-  .homes__col__js:nth-of-type(3) {
+@media only screen and (max-width: 540px){
+  .homes__col:nth-of-type(3) {
     display: none;
   }
   .homes__section .homes__col:nth-of-type(2){
     margin-right: 0;
+  }
+  .homes__col{
+    width: 100%;
   }
 
 }
