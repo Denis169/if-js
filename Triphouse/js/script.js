@@ -429,7 +429,6 @@ document.body.addEventListener('click', checkInCheckOutOff);
   try {
     if (sessionStorage.getItem('places') === null){
     let places = await (await fetch('https://fe-student-api.herokuapp.com/api/hotels/popular')).json();
-    console.log(places);
     sessionStorage.setItem('places', JSON.stringify(places));
     }
 
