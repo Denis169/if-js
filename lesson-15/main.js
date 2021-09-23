@@ -5,7 +5,8 @@ const sendFile = async(event) => {
 
   try {
     const formData = new FormData(formSendFile);
-    console.log(await ((await fetch('https://fe-student-api.herokuapp.com/api/file', {method: 'POST', body: formData})).json()));
+    const responseFromServer = await ((await fetch('https://fe-student-api.herokuapp.com/api/file', {method: 'POST', body: formData})).json());
+    console.log(responseFromServer);
 
   } catch (err) {
     console.log('An error has occurred:', err);
