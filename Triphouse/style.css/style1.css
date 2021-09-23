@@ -377,6 +377,7 @@ h1 {
   line-height: 28px;
   line-height: 100%;
   color: var(--white);
+  cursor: pointer;
 }
 
 .header__mobile-input-date-block,.header__mobile-accommodation-block {

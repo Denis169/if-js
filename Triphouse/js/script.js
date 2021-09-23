@@ -420,6 +420,34 @@ checkInCheckOut.addEventListener('click', checkInCheckOutOn);
 checkInCheckOut.addEventListener('click', choosePeopleOf);
 document.body.addEventListener('click', checkInCheckOutOff);
 
+// Header submit form
+
+const formSendFile = document.getElementById('form-destination');
+
+
+
+const sendFileDestination = (event) => {
+  event.preventDefault();
+  const formData = new FormData(formSendFile);
+  console.log(Array.from(formData.entries())[0][1]);
+  
+  console.log(filterCounts.adults.current);
+  
+  if (filterCounts.children.current !== 0) {
+    for (let i = 0; i < filterCounts.children.current; i++)
+    console.log(document.querySelector(`#header__childs-age select:nth-of-type(${i+1})`).selectedIndex + 1)
+  };
+  
+  console.log(filterCounts.rooms.current);
+
+  // fetch('https://fe-student-api.herokuapp.com/api/hotels?search=us&adults=2&children=3,10&rooms=2')
+  //     .then(response => response.json())
+  //     .then(data => console.log(data))
+  //     .catch(err => console.log('Fetch err:', err));
+};
+
+
+formSendFile.addEventListener('submit', sendFileDestination);
 
 
 
@@ -429,7 +457,6 @@ document.body.addEventListener('click', checkInCheckOutOff);
   try {
     if (sessionStorage.getItem('places') === null){
     let places = await (await fetch('https://fe-student-api.herokuapp.com/api/hotels/popular')).json();
-    console.log(places);
     sessionStorage.setItem('places', JSON.stringify(places));
     }
 
