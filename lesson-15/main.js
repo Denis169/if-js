@@ -1,16 +1,15 @@
 const formSendFile = document.getElementById('form');
 
-const sendFile = (event) => {
+const sendFile = async(event) => {
   event.preventDefault();
-  const formData = new FormData(formSendFile);
-  
-  fetch('https://fe-student-api.herokuapp.com/api/file', {
-    method: 'POST',
-    body: formData,
-  })  .then(response => response.json())
-      .then(data => console.log(data))
-      .catch(err => console.log('Fetch err:', err));
-};
 
+  try {
+    const formData = new FormData(formSendFile);
+    console.log(await ((await fetch('https://fe-student-api.herokuapp.com/api/file', {method: 'POST', body: formData})).json()));
+
+  } catch (err) {
+    console.log('An error has occurred:', err);
+  }
+};
 
 formSendFile.addEventListener('submit', sendFile)
