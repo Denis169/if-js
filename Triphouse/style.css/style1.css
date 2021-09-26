@@ -380,7 +380,8 @@ h1 {
   cursor: pointer;
 }
 
-.header__mobile-input-date-block,.header__mobile-accommodation-block {
+.header__mobile-input-date-block,
+.header__mobile-accommodation-block {
   display: none;
 }
 

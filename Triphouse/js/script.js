@@ -399,7 +399,7 @@ currentMonthNext.addEventListener('click', (event) => {
     changeLabeOut(Number(event.target.id), countSecondMonth);  
     changeInscriptionDate();
     checkInCheckOutOff();
-    console.log(1);
+    
   } else if (Number(event.target.id) !== 0 && (/\d/g).test(event.target.id) && (event.target.id).length <= 2) {
     event.target.classList.toggle('background-color__date');
     chooseDateCurrent = howMatchDaysInMonth(0) + Number(event.target.id);
@@ -424,26 +424,81 @@ document.body.addEventListener('click', checkInCheckOutOff);
 
 const formSendFile = document.getElementById('form-destination');
 
+const dataRetrieval = async(search, adults, children, rooms) => {
+  try{
+    const data = await fetch(`https://fe-student-api.herokuapp.com/api/hotels?search=${search}&adults=${adults}&children=${children},10&rooms=${rooms}`).then(data => data.json());
 
+    let count = 0;
+    let countLeft = data.length - 1;
+    
+    const sliderRight = document.getElementById('available-arrow-right');
+    const sliderLeft = document.getElementById('available-arrow-left');
+
+    document.getElementById('available-hotels').classList.remove('header__display-none');
+
+    const addNewElement = (data, counter) => {
+      const newDiv =  document.createElement('div');
+      newDiv.setAttribute('class', 'homes__col');
+      newDiv.innerHTML = `
+        <img class="homes__images" src="${data[counter].imageUrl}" alt="Hotel">
+        <a class="homes__link" href="">${data[counter].name}</a>
+        <p class="homes__text">${data[counter].city}, ${data[counter].country}</p>
+      `;
+      return newDiv;
+    }
+
+    const blockFilling = () => {
+      for (let i = 0; i <= 3 && i <= data.length - 1; i++) {
+        document.getElementById('available__section-col').append(addNewElement(data, i));
+        count = i;
+      }
+    }
+
+    const changeColRight = () => {
+      document.getElementById('available__section-col').removeChild(document.getElementById('available__section-col').firstElementChild);
+      count === data.length - 1 ? count = 0 : count++;
+      document.getElementById('available__section-col').append(addNewElement(data, count));
+      countLeft === data.length - 1 ? countLeft = 0 : countLeft++;
+      console.log('хрень:',data);
+    }
+
+    const changeColLeft = () => {
+      document.getElementById('available__section-col').removeChild(document.getElementById('available__section-col').lastElementChild);
+      
+      document.getElementById('available__section-col').prepend(addNewElement(data, countLeft));
+      countLeft === 0 ? countLeft = data.length - 1 : countLeft--;
+      count === 0 ? count = data.length - 1 : count--;
+    }
+
+    blockFilling();
+    sliderRight.addEventListener('click', changeColRight);
+    sliderLeft.addEventListener('click', changeColLeft);
+ 
+  
+  } catch (error) {
+    console.log(error);
+  }
+}
 
 const sendFileDestination = (event) => {
   event.preventDefault();
+  event.stopPropagation();
+  document.getElementById('available__section-col').innerHTML = '';
+  delete data;
   const formData = new FormData(formSendFile);
-  console.log(Array.from(formData.entries())[0][1]);
-  
-  console.log(filterCounts.adults.current);
+  const searchLine = Array.from(formData.entries())[0][1];
+  const numberOfAdults = filterCounts.adults.current;
+  let children = '';
   
   if (filterCounts.children.current !== 0) {
-    for (let i = 0; i < filterCounts.children.current; i++)
-    console.log(document.querySelector(`#header__childs-age select:nth-of-type(${i+1})`).selectedIndex + 1)
+    for (let i = 0; i < filterCounts.children.current; i++) {
+      if (i !== 0) children += ',';
+      children += document.querySelector(`#header__childs-age select:nth-of-type(${i+1})`).selectedIndex + 1;
+    };
   };
   
-  console.log(filterCounts.rooms.current);
-
-  // fetch('https://fe-student-api.herokuapp.com/api/hotels?search=us&adults=2&children=3,10&rooms=2')
-  //     .then(response => response.json())
-  //     .then(data => console.log(data))
-  //     .catch(err => console.log('Fetch err:', err));
+  const rooms = filterCounts.rooms.current;
+  dataRetrieval(searchLine,numberOfAdults,children,rooms);
 };
 
 
