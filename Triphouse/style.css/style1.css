@@ -681,6 +681,13 @@ h1 {
 
 /*Homes guests loves*/
 
+.available__grey-background {
+  background-color: gray ;
+  width: 80vw;
+  color: white;
+  font-size: 48px;
+}
+
 .homes {
   background-color: var(--background-gray);
 }
