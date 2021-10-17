@@ -309,11 +309,11 @@ previousMonthLeft.addEventListener('click', (event) => {
 });
 
 const changeLabeIn = (numberDay, numberMonth) => {
-  labelIn = (`${numberDay}.${letMonth(numberMonth).toLocaleDateString('en-us', { month: 'numeric'})}.${letMonth(numberMonth).toLocaleDateString('en-us', { year: 'numeric' })}`);
+  labelIn = (`${numberDay}.${letMonth(numberMonth).toLocaleDateString('en-us', { month: '2-digit'})}.${letMonth(numberMonth).toLocaleDateString('en-us', { year: 'numeric' })}`);
 }
 
 const changeLabeOut = (numberDay, numberMonth) => {
-  labelOut = (`${numberDay}.${letMonth(numberMonth).toLocaleDateString('en-us', { month: 'numeric'})}.${letMonth(numberMonth).toLocaleDateString('en-us', { year: 'numeric' })}`);
+  labelOut = (`${numberDay}.${letMonth(numberMonth).toLocaleDateString('en-us', { month: '2-digit'})}.${letMonth(numberMonth).toLocaleDateString('en-us', { year: 'numeric' })}`);
 }
 
 currentMonth.addEventListener('click', (event) => {
@@ -399,7 +399,7 @@ currentMonthNext.addEventListener('click', (event) => {
     changeLabeOut(Number(event.target.id), countSecondMonth);  
     changeInscriptionDate();
     checkInCheckOutOff();
-    console.log(1);
+    
   } else if (Number(event.target.id) !== 0 && (/\d/g).test(event.target.id) && (event.target.id).length <= 2) {
     event.target.classList.toggle('background-color__date');
     chooseDateCurrent = howMatchDaysInMonth(0) + Number(event.target.id);
@@ -420,8 +420,101 @@ checkInCheckOut.addEventListener('click', checkInCheckOutOn);
 checkInCheckOut.addEventListener('click', choosePeopleOf);
 document.body.addEventListener('click', checkInCheckOutOff);
 
+// Header submit form
 
+const formSendFile = document.getElementById('form-destination');
+const sliderRight = document.getElementById('available-arrow-right');
+const sliderLeft = document.getElementById('available-arrow-left');
 
+let available = [];
+
+let count = 0;
+let countLeft = available.length - 1;
+
+const addNewElement = (counter) => {
+  const newDiv =  document.createElement('div');
+  newDiv.setAttribute('class', 'homes__col');
+  newDiv.innerHTML = `
+    <img class="homes__images" src="${available[counter].imageUrl}" alt="Hotel">
+    <a class="homes__link" href="">${available[counter].name}</a>
+    <p class="homes__text">${available[counter].city}, ${available[counter].country}</p>
+  `;
+  return newDiv;
+}
+
+const blockFilling = () => {
+  for (let i = 0; i <= 3 && i <= available.length - 1; i++) {
+    document.getElementById('available__section-col').append(addNewElement(i));
+    count = i;
+  }
+}
+
+const emptyBlock = () =>{
+  document.getElementById('available__section-col').innerText = 'Unfortunately no suitable places were found';
+  document.getElementById('available__section-col').classList.add('available__grey-background');
+}
+
+const changeColRight = () => {
+  document.getElementById('available__section-col').removeChild(document.getElementById('available__section-col').firstElementChild);
+  count === available.length - 1 ? count = 0 : count++;
+  document.getElementById('available__section-col').append(addNewElement(count));
+  countLeft === available.length - 1 ? countLeft = 0 : countLeft++;
+}
+
+const changeColLeft = () => {
+  document.getElementById('available__section-col').removeChild(document.getElementById('available__section-col').lastElementChild);
+  document.getElementById('available__section-col').prepend(addNewElement(countLeft));
+  countLeft === 0 ? countLeft = available.length - 1 : countLeft--;
+  count === 0 ? count = available.length - 1 : count--;
+}
+
+const dataRetrieval = async(search, adults, children, rooms) => {
+  try{
+    const data = await fetch(`https://fe-student-api.herokuapp.com/api/hotels?search=${search}&adults=${adults}&children=${children},10&rooms=${rooms}`).then(data => data.json());    
+    available = data;  
+    document.getElementById('available-hotels').classList.remove('header__display-none');
+
+    available.length === 0 ? emptyBlock() : blockFilling();
+   
+    if (available.length < 5) {
+      sliderRight.classList.add('header__display-none');
+      sliderLeft.classList.add('header__display-none');
+    }
+
+    if (available.length > 4) {
+      sliderRight.classList.remove('header__display-none');
+      sliderLeft.classList.remove('header__display-none');
+    }
+  
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+const sendFileDestination = (event) => {
+  event.preventDefault();
+  event.stopPropagation();
+  document.getElementById('available__section-col').innerHTML = '';
+  delete data;
+  const formData = new FormData(formSendFile);
+  const searchLine = Array.from(formData.entries())[0][1];
+  const numberOfAdults = filterCounts.adults.current;
+  let children = '';
+  
+  if (filterCounts.children.current !== 0) {
+    for (let i = 0; i < filterCounts.children.current; i++) {
+      if (i !== 0) children += ',';
+      children += document.querySelector(`#header__childs-age select:nth-of-type(${i+1})`).selectedIndex + 1;
+    };
+  };
+  
+  const rooms = filterCounts.rooms.current;
+  dataRetrieval(searchLine,numberOfAdults,children,rooms);
+};
+
+formSendFile.addEventListener('submit', sendFileDestination);
+sliderRight.addEventListener('click', changeColRight);
+sliderLeft.addEventListener('click', changeColLeft);
 
 // Homes guests loves
 
@@ -429,7 +522,22 @@ document.body.addEventListener('click', checkInCheckOutOff);
   try {
     if (sessionStorage.getItem('places') === null){
     let places = await (await fetch('https://fe-student-api.herokuapp.com/api/hotels/popular')).json();
-    sessionStorage.setItem('places', JSON.stringify(places));
+
+    const bubbleSort = (arr) => {
+      let swap;
+      do {
+        swap = false;
+        for (let i = 1; i < arr.length; ++i) {
+          if (arr[i - 1].name > arr[i].name) {
+            [arr[i], arr[i - 1]] = [arr[i - 1], arr[i]];
+            swap = true;
+          }
+        }
+      } while (swap)
+      return arr;
+    }
+    
+    sessionStorage.setItem('places', JSON.stringify(bubbleSort(places)));
     }
 
     const data = JSON.parse(sessionStorage.getItem('places'));

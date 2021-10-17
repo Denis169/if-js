@@ -377,9 +377,11 @@ h1 {
   line-height: 28px;
   line-height: 100%;
   color: var(--white);
+  cursor: pointer;
 }
 
-.header__mobile-input-date-block,.header__mobile-accommodation-block {
+.header__mobile-input-date-block,
+.header__mobile-accommodation-block {
   display: none;
 }
 
@@ -678,6 +680,13 @@ h1 {
 }
 
 /*Homes guests loves*/
+
+.available__grey-background {
+  background-color: gray ;
+  width: 80vw;
+  color: white;
+  font-size: 48px;
+}
 
 .homes {
   background-color: var(--background-gray);

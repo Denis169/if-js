@@ -68,13 +68,13 @@
         </div>
         <div class="header__top-section">
           <h1>Discover stays <br> to live, work or just relax</h1>
-          <form class="header__form">    
+          <form class="header__form" id="form-destination">    
             <div class="header__input-place-block">
               <svg class="header__svg-magnifier">
                 <use href="#magnifier"/>
               </svg>
               <label for="place" class="label">Your destination or hotel name</label>
-              <input class="header__input input-place " id="place" type="text" placeholder="New York" required>
+              <input class="header__input input-place " id="place" type="text" placeholder="New York" name="destinationOrHotel">
             </div>
             <div class="header__input-date-block">
               <p class="header__input input-date" id="chose-date" type="text">Check-in — Check-out</p>
@@ -138,11 +138,11 @@
             <div class="header__mobile-input-date-block">
               <div class="header__mobile-date">
                 <label for="date-in" class="label-date">Tue 15 Sept 2020</label>
-                <input class="header__input-mobile-date" id="date-in" type="text" placeholder="Check-in date" required/>
+                <input class="header__input-mobile-date" id="date-in" type="text" placeholder="Check-in date"/>
               </div>
               <div class="header__mobile-date">
                 <label for="date-out" class="label-date">Sat 19 Sept 2020</label>
-                <input class="header__input-mobile-date" id="date-out" type="text" placeholder="Check-out date" required/>
+                <input class="header__input-mobile-date" id="date-out" type="text" placeholder="Check-out date"/>
               </div>
             </div>
             <div class="header__input-adults-block" id="peopleFilter">
@@ -182,19 +182,19 @@
             <div class="header__mobile-accommodation-block">
               <div class="header__mobile-adults">
                 <label for="adults" class="label-accommodation">2</label>
-                <input class="header__input-mobile-accommodation" id="adults" type="text" placeholder="Adults" required/>
+                <input class="header__input-mobile-accommodation" id="adults" type="text" placeholder="Adults" />
               </div>
               <div class="header__mobile-children">
                 <label for="children" class="label-accommodation">0</label>
-                <input class="header__input-mobile-accommodation" id="children" type="text" placeholder="Children" required/>
+                <input class="header__input-mobile-accommodation" id="children" type="text" placeholder="Children" />
               </div>
               <div class="header__mobile-rooms">
                 <label for="rooms" class="label-accommodation">1</label>
-                <input class="header__input-mobile-accommodation" id="rooms" type="text" placeholder="Rooms" required/>
+                <input class="header__input-mobile-accommodation" id="rooms" type="text" placeholder="Rooms" />
               </div>
             </div>
             <div class="header__input-button-block">
-              <input class="header__input input-button" type="button" value="Search">
+              <input class="header__input input-button" type="submit" value="Search">
             </div>
           </form>
           <div class="header__market">
@@ -204,6 +204,22 @@
         </div>
       </div>
     </header>
+    <!--Available hotels-->
+    <div class="Available-hotels homes header__display-none" id="available-hotels">
+      <div class="container">
+        <h2 class="homes__caption">Available hotels</h2>
+        <div class="homes__section" id="available__section">
+          <div class="homes__section-col" id="available__section-col">
+          </div>
+          <div class="homes__svg_arrow-right" id="available-arrow-right">
+            <img src="./image/arrow-slider.svg" alt="slider">
+          </div>
+          <div class="homes__svg_arrow-left" id="available-arrow-left">
+            <img src="./image/arrow-slider.svg" alt="slider">
+          </div>
+        </div>
+      </div>
+    </div>
     <!-- Блок What do we offer -->
     <section class="container">
       <h2 class="What-do-we-offer">What do we offer</h2>
