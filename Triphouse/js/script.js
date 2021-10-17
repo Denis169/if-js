@@ -1,4 +1,4 @@
-// Header forma people
+// Header form people
 const adultsChildrenRooms = document.getElementById('peopleFilter');
 const minusAdults = document.getElementById('minus-adults');
 const plusAdults = document.getElementById('plus-adults');
