@@ -227,6 +227,10 @@ h1 {
   cursor: pointer;
 }
 
+.now {
+  color: var(--primary);
+}
+
 .header__number-of-days,
 .header__number__two__of__days__js {
   flex-direction:column;
